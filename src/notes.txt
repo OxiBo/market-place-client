@@ -1,0 +1,20 @@
+subscriptions - https://www.howtographql.com/react-apollo/8-subscriptions/
+
+DELETE ITEM and subscription. 
+Needed to add previousValues(id) to product subscription payload in graphql schema, in subscribeToMore function in Homepage component(the one with the list of products) check for mutation of type of DELETED and filter to deleted the product with the id of deleted item which comes back from server in previousValue 
+
+updating CACHE - https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#updating-the-cache
+
+DELETE ITEM
+in DeleteButton component another way of handling delete and updating product list is using update function in Mutation component like so -  // use this in mutation component this the function below -   update={this.update}
+  /* update = (cache, payload) => {
+    const data = cache.readQuery({ query: FETCH_PRODUCTS });
+    data.products = data.products.filter((product) => {
+      return product.id !== payload.data.deleteProduct.id;
+    });
+    
+    cache.writeQuery({ query: FETCH_PRODUCTS, data });
+  }; */
+  Since i use subscription in the product list, i did not need this/
+
+

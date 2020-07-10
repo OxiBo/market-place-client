@@ -1,0 +1,10 @@
+apollo components - https://www.apollographql.com/docs/react/api/react-components/
+
+Mutation component - https://www.apollographql.com/docs/react/api/react-components/#mutation
+one of the ways to pass variables to Mutation component -   const response = await loginMutation({ variables }); // https://stackoverflow.com/questions/54574000/how-to-pass-variables-to-an-apollo-mutation-component
+
+subscription - https://www.howtographql.com/react-apollo/8-subscriptions/
+
+Formik - use for form validation - https://jaredpalmer.com/formik/docs/overview
+(use in inside mutation component to access variables, call mutation in onSubmit)
+
