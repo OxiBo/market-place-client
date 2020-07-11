@@ -22,8 +22,8 @@ const ItemStyles = styled.div`
   background: white;
   /* min-height: 170px; */
   border: 1px solid lightgray;
-  margin: 2rem;
-  padding: 1.5rem;
+  margin: 0.5rem 1rem;
+  padding: 0 1rem;
   width: 220px;
   max-width: 300px;
   flex: 1 auto;

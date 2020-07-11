@@ -58,10 +58,6 @@ export const FETCH_SINGLE_PRODUCT = gql`
         id
         name
       }
-      reviews {
-        text
-        rating
-      }
     }
   }
 `;
@@ -95,6 +91,22 @@ export const PAGINATION = gql`
     productsConnection {
       aggregate {
         count
+      }
+    }
+  }
+`;
+
+
+// https://stackoverflow.com/questions/44403930/error-network-error-error-writing-result-to-store-for-query-apollo-client
+export const FETCH_PRODUCT_REVIEWS = gql`
+  query FETCH_PRODUCT_REVIEWS($id: ID!) {
+    product(where: { id: $id }) {
+      id
+      name
+      reviews {
+        id
+        text
+        rating
       }
     }
   }

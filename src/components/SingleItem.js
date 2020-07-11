@@ -4,8 +4,10 @@ import { withCookies } from "react-cookie";
 import styled from "styled-components";
 import Error from "./ErrorMessage";
 import DeleteButton from "./DeleteButton";
+import ProductReviews from "./ProductReviews";
 import { FETCH_SINGLE_PRODUCT } from "../utils/operations";
 import { PriceTag } from "./Item";
+// import ProductReview from "./ProductReview";
 import Buttons from "./styled/Buttons";
 import Button from "./styled/Button";
 import { ItemButton } from "./Item";
@@ -30,28 +32,36 @@ const Visual = styled.div`
     height: 400px;
     object-fit: cover;
   }
-  div.seller {
-    display: flex;
-    p {
-      text-align: center;
-      padding: 1rem;
-      display: block;
-      line-height: 2;
-      font-style: italic;
-    }
-    h2 {
-      padding: 1rem;
-      flex: 1;
-      /* margin: 1rem auto; */
-    }
-  }
-  div.rating {
+`;
+
+const VisualDivs = styled.div`
+  display: flex;
+  justify-content: center;
+  p {
+    min-width: 6rem;
+    text-align: center;
     padding: 1rem;
-    p {
-      text-align: center;
-    }
+    display: block;
+    line-height: 2;
+    font-style: italic;
+  }
+  h2,
+  h3 {
+    padding: 1rem;
+    flex: 1;
+    text-align: center;
+    line-height: 2;
+    /* margin: 1rem auto; */
+  }
+  a{
+    cursor: pointer;
+    text-align: center;
+    padding: 1rem;
+    /* line-height: 2; */
+    color: ${props => props.theme.purple}
   }
 `;
+
 const ProductInfo = styled.div`
   flex: 55%;
   padding: 0 0 0 1rem;
@@ -110,10 +120,22 @@ const Price = styled.span`
 `;
 
 class SingleItem extends Component {
+  state = {
+    reviews: true,
+  };
+
+  showReviews = () => {
+    this.setState((prevState) => ({
+      reviews: !prevState.reviews,
+    }));
+  };
+
   render() {
     // console.log(this.props);
     const { allCookies } = this.props;
     const userId = allCookies.id;
+    const type = allCookies.type;
+    // console.log(type);
     return (
       <Query
         query={FETCH_SINGLE_PRODUCT}
@@ -141,51 +163,59 @@ class SingleItem extends Component {
             reviews,
           } = data.product;
           return (
-            <SingleItemStyles>
-              <Visual>
-                <img
-                  src={
-                    largeImage ||
-                    "https://res.cloudinary.com/di0hg10hd/image/upload/c_scale,q_auto,w_1000/v1594237808/sickfits/n0t4uceatjy5jdoee9p0.png"
-                  }
-                  alt={name}
-                />{" "}
-                <div className="rating">
-                  {rating ? (
-                    <>
-                      <p>Rating: </p>
-                      <h3>{rating}</h3>
-                    </>
-                  ) : (
-                    <p>Nobody rated the product yet</p>
-                  )}
-                </div>
-                <div className="seller">
-                  <p>Sold By: </p>
-                  <h2>{seller.name}</h2>
-                </div>
-              </Visual>
-              <ProductInfo>
-                <h3>{name}</h3>
-                <hr />
-                <p className="description">{description}</p>
-                <Price>${price.toFixed(2)}</Price>
-                <p className="stock">
-                  {stock > 0 ? "in stock" : "not in stock"}
-                </p>
+            <>
+              <SingleItemStyles>
+                <Visual>
+                  <img
+                    src={
+                      largeImage ||
+                      "https://res.cloudinary.com/di0hg10hd/image/upload/c_scale,q_auto,w_1000/v1594237808/sickfits/n0t4uceatjy5jdoee9p0.png"
+                    }
+                    alt={name}
+                  />{" "}
+                  <VisualDivs>
+                    {rating ? (
+                      <>
+                        <p>Rating: </p>
+                        <h3>{rating}</h3>
+                        <a onClick={this.showReviews}>
+                          {" "}
+                          {this.state.reviews ? "Hide Reviews" : "See Reviews"}
+                        </a>
+                      </>
+                    ) : (
+                      <p>Nobody rated the product yet</p>
+                    )}
+                  </VisualDivs>
+                  <VisualDivs>
+                    <p>Sold By: </p>
+                    <h2>{seller.name}</h2>
+                  </VisualDivs>
+                </Visual>
+                <ProductInfo>
+                  <h3>{name}</h3>
+                  <hr />
+                  <p className="description">{description}</p>
+                  <Price>${price.toFixed(2)}</Price>
+                  <p className="stock">
+                    {stock > 0 ? "in stock" : "not in stock"}
+                  </p>
 
-                <Buttons>
-                  <ItemButton onClick={() => this.props.history.goBack()}>
-                    ← Go Back
-                  </ItemButton>
-                  {userId === seller.id && (
-                    <DeleteButton id={id} history={this.props.history}>
-                      Delete This Product
-                    </DeleteButton>
-                  )}
-                </Buttons>
-              </ProductInfo>
-            </SingleItemStyles>
+                  <Buttons>
+                    <ItemButton onClick={() => this.props.history.goBack()}>
+                      ← Go Back
+                    </ItemButton>
+                    {userId === seller.id && (
+                      <DeleteButton id={id} history={this.props.history}>
+                        Delete This Product
+                      </DeleteButton>
+                    )}
+                    {type === "BUYER" && <ItemButton>Add To Cart</ItemButton>}
+                  </Buttons>
+                </ProductInfo>
+              </SingleItemStyles>
+              {this.state.reviews && <ProductReviews productId={id} />}
+            </>
           );
         }}
       </Query>

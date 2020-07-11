@@ -8,3 +8,4 @@ subscription - https://www.howtographql.com/react-apollo/8-subscriptions/
 Formik - use for form validation - https://jaredpalmer.com/formik/docs/overview
 (use in inside mutation component to access variables, call mutation in onSubmit)
 
+FETCH REVIEWS query gave me an error because the query needed to fetch product id along with review and the needed fields - https://stackoverflow.com/questions/44403930/error-network-error-error-writing-result-to-store-for-query-apollo-client  , https://github.com/apollographql/react-apollo/issues/1656
