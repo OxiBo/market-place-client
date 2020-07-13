@@ -41,14 +41,13 @@ class ProductReviews extends Component {
   state = {
     page: 1,
   };
-//   getPage = (page) => {
-//     this.setState({ page });
-//   };
+  //   getPage = (page) => {
+  //     this.setState({ page });
+  //   };
 
-getPage = (n) => {
-    this.setState(prevState => ({ page: prevState.page + n}))
-}
-
+  getPage = (n) => {
+    this.setState((prevState) => ({ page: prevState.page + n }));
+  };
 
   render() {
     const { page } = this.state;
@@ -64,14 +63,16 @@ getPage = (n) => {
         {({ data, error, loading }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <Error error={error} />;
-          {/* console.log(data); */}
+          {
+            /* console.log(data); */
+          }
           const { reviews } = data;
           return (
             <ReviewsStyles background={"#BEEDEB"}>
               <h2>Reviews For {this.props.name}</h2>
               <ReviewsPagination
                 productId={this.props.productId}
-                getPage={this.getPage} 
+                getPage={this.getPage}
                 page={this.state.page}
               />
               {reviews.map((review) => {
