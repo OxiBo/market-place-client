@@ -86,8 +86,8 @@ export const DELETE_PRODUCT = gql`
   }
 `;
 
-export const PAGINATION = gql`
-  query PAGINATION {
+export const ALL_PRODUCTS_PAGINATION = gql`
+  query ALL_PRODUCTS_PAGINATION {
     productsConnection {
       aggregate {
         count
@@ -96,17 +96,41 @@ export const PAGINATION = gql`
   }
 `;
 
-
 // https://stackoverflow.com/questions/44403930/error-network-error-error-writing-result-to-store-for-query-apollo-client
+// export const FETCH_PRODUCT_REVIEWS = gql`
+//   query FETCH_PRODUCT_REVIEWS($id: ID!) {
+//     product(where: { id: $id }) {
+//       id
+//       name
+//       reviews {
+//         id
+//         text
+//         rating
+//       }
+//     }
+//   }
+// `;
+
 export const FETCH_PRODUCT_REVIEWS = gql`
-  query FETCH_PRODUCT_REVIEWS($id: ID!) {
-    product(where: { id: $id }) {
+  query FETCH_PRODUCT_REVIEWS($productId: ID, $skip: Int = 0, $first: Int = 4) {
+    reviews(
+      productId: $productId
+      first: $first
+      skip: $skip
+      orderBy: createdAt_DESC
+    ) {
       id
-      name
-      reviews {
-        id
-        text
-        rating
+      rating
+      text
+    }
+  }
+`;
+
+export const ALL_REVIEWS_PAGINATION = gql`
+  query ALL_REVIEWS_PAGINATION($productId: ID!) {
+    reviewsConnection(where: { product: { id: $productId } }) {
+      aggregate {
+        count
       }
     }
   }

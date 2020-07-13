@@ -53,12 +53,12 @@ const VisualDivs = styled.div`
     line-height: 2;
     /* margin: 1rem auto; */
   }
-  a{
+  a {
     cursor: pointer;
     text-align: center;
     padding: 1rem;
     /* line-height: 2; */
-    color: ${props => props.theme.purple}
+    color: ${(props) => props.theme.purple};
   }
 `;
 
@@ -172,14 +172,14 @@ class SingleItem extends Component {
                       "https://res.cloudinary.com/di0hg10hd/image/upload/c_scale,q_auto,w_1000/v1594237808/sickfits/n0t4uceatjy5jdoee9p0.png"
                     }
                     alt={name}
-                  />{" "}
+                  />
                   <VisualDivs>
                     {rating ? (
                       <>
                         <p>Rating: </p>
                         <h3>{rating}</h3>
                         <a onClick={this.showReviews}>
-                          {" "}
+                          
                           {this.state.reviews ? "Hide Reviews" : "See Reviews"}
                         </a>
                       </>
@@ -214,7 +214,9 @@ class SingleItem extends Component {
                   </Buttons>
                 </ProductInfo>
               </SingleItemStyles>
-              {this.state.reviews && <ProductReviews productId={id} />}
+              {this.state.reviews && (
+                <ProductReviews productId={id} name={name} />
+              )}
             </>
           );
         }}

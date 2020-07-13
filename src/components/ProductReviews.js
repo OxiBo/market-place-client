@@ -4,9 +4,9 @@ import styled from "styled-components";
 import Error from "./ErrorMessage";
 import { FETCH_PRODUCT_REVIEWS } from "../utils/operations";
 import InnerContainer from "./styled/InnerContainer";
-
-const renderStars = (n, iconName) =>
-  [...Array(n)].map((icon, i) => <i key={i} className={iconName}></i>);
+import SingleReview from "./SingleReview";
+import ReviewsPagination from "./ReviewsPagination";
+import { reviewsPerPage } from "../configVars";
 
 const ReviewsStyles = styled(InnerContainer)`
   background-color: ${(props) => props.background};
@@ -25,6 +25,7 @@ const ReviewsStyles = styled(InnerContainer)`
     p {
       padding: 1rem;
       min-width: 8rem;
+      width: 10rem;
       span {
         padding: 0.5rem;
       }
@@ -37,31 +38,44 @@ const ReviewsStyles = styled(InnerContainer)`
 `;
 
 class ProductReviews extends Component {
+  state = {
+    page: 1,
+  };
+//   getPage = (page) => {
+//     this.setState({ page });
+//   };
+
+getPage = (n) => {
+    this.setState(prevState => ({ page: prevState.page + n}))
+}
+
+
   render() {
+    const { page } = this.state;
     return (
       <Query
         query={FETCH_PRODUCT_REVIEWS}
-        variables={{ id: this.props.productId }}
+        variables={{
+          productId: this.props.productId,
+          skip: page * reviewsPerPage - reviewsPerPage,
+          first: reviewsPerPage,
+        }}
       >
         {({ data, error, loading }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <Error error={error} />;
-          const { reviews, name } = data.product;
+          {/* console.log(data); */}
+          const { reviews } = data;
           return (
             <ReviewsStyles background={"#BEEDEB"}>
-              <h2>Reviews For {name}</h2>
-              {reviews.map(({ id, rating, text }) => {
-                const emptyIcon = 5 - rating;
-                return (
-                  <div key={id}>
-                    <p>
-                      {renderStars(rating, "fa fa-star")}
-                      {renderStars(emptyIcon, "fa fa-star-o")}
-                      <span> {rating}</span>
-                    </p>
-                    <p className="text">{text}</p>
-                  </div>
-                );
+              <h2>Reviews For {this.props.name}</h2>
+              <ReviewsPagination
+                productId={this.props.productId}
+                getPage={this.getPage} 
+                page={this.state.page}
+              />
+              {reviews.map((review) => {
+                return <SingleReview key={review.id} review={review} />;
               })}
             </ReviewsStyles>
           );

@@ -5,12 +5,12 @@ import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 import Helmet from 'react-helmet'
 import PaginationStyles from "./styled/PaginationStyles";
-import { PAGINATION } from "../utils/operations";
+import { ALL_PRODUCTS_PAGINATION } from "../utils/operations";
 import { perPage } from "../configVars";
 import Error from "./ErrorMessage";
 const Pagination = (props) => {
   return (
-    <Query query={PAGINATION}>
+    <Query query={ALL_PRODUCTS_PAGINATION}>
       {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>;
 
