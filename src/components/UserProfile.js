@@ -162,12 +162,13 @@ class UserProfile extends Component {
                                   errors.password =
                                     "Password has to be at least 8 characters long";
                                 }
+                                if(!Number.isInteger(age) || (age < 14 || age > 120)){
+                                  errors.age = "Age has to be an integer not less then 14 or bigger then 120"
+                                }
                                 return errors;
                               }}
                               onSubmit={async (values, { setSubmitting }) => {
-                                {
-                                  /* const { email, password, name, age } = values; */
-                                }
+                             
                                 await this.setState({ role });
 
                                 try {

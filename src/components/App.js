@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 // import market from "../styles/images/market.jpeg";
 // import { instanceOf } from "prop-types";
-import { withCookies, Cookies } from "react-cookie";
+import { withCookies } from "react-cookie";
 // import Test from "./Test"
 // import Login from "./Login"
 // import logo from "../logo.svg";
@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+font-size: 15px;
 
 }
 *, *:before, *:after{

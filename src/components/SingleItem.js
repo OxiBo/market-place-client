@@ -52,6 +52,9 @@ const VisualDivs = styled.div`
     text-align: center;
     line-height: 2;
     /* margin: 1rem auto; */
+    a{
+      text-decoration: none;
+    }
   }
   a {
     cursor: pointer;
@@ -121,8 +124,10 @@ const Price = styled.span`
 
 class SingleItem extends Component {
   state = {
-    reviews: true,
+    reviews: false,
   };
+
+
 
   showReviews = () => {
     this.setState((prevState) => ({
@@ -189,7 +194,7 @@ class SingleItem extends Component {
                   </VisualDivs>
                   <VisualDivs>
                     <p>Sold By: </p>
-                    <h2>{seller.name}</h2>
+                    <h2><a href={`/seller/${seller.id}`}><span>{seller.name}</span></a></h2>
                   </VisualDivs>
                 </Visual>
                 <ProductInfo>

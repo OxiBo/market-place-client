@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
+import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 
 import styled from "styled-components";
@@ -8,6 +9,7 @@ import { withCookies } from "react-cookie";
 import { Mutation } from "react-apollo";
 // import gql from "graphql-tag";
 import Error from "./ErrorMessage";
+// import RequestReset from "./RequestReset";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
@@ -28,6 +30,14 @@ const AuthContainer = styled.div`
     margin: 0 0 3rem 0;
   }
   /* display: flex; */
+`;
+
+const LinkButton = styled(Button)`
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
 `;
 
 class Login extends Component {
@@ -160,12 +170,9 @@ class Login extends Component {
                     isSubmitting,
                     /* and other goodies */
                   }) => {
-                    {
-                      /* const { name, email, password } = values; */
-                    }
                     return (
                       <Form>
-                        <form action="" onSubmit={handleSubmit}>
+                        <form action="" method="POST" onSubmit={handleSubmit}>
                           <div className="fieldset">
                             {!login && (
                               <div>
@@ -267,7 +274,11 @@ class Login extends Component {
                                 ? "need an account?"
                                 : "already have an account?"}
                             </Button>
+                            <LinkButton>
+                              <Link to="/request-reset">forgot password?</Link>
+                            </LinkButton>
                             <Button
+                            type="button"
                               onClick={() => {
                                 this.props.history.goBack(); // TODO - check when in redirects if there were error messages while logging in
                               }}

@@ -11,6 +11,7 @@ import { reviewsPerPage } from "../configVars";
 const ReviewsStyles = styled(InnerContainer)`
   background-color: ${(props) => props.background};
   padding: 1rem;
+  height: 30rem;
   h2 {
     margin: 0;
   }
@@ -45,6 +46,10 @@ class ProductReviews extends Component {
   //     this.setState({ page });
   //   };
 
+  // componentDidMount(){
+  //     console.log('mounted')
+  // }
+
   getPage = (n) => {
     this.setState((prevState) => ({ page: prevState.page + n }));
   };
@@ -52,36 +57,38 @@ class ProductReviews extends Component {
   render() {
     const { page } = this.state;
     return (
-      <Query
-        query={FETCH_PRODUCT_REVIEWS}
-        variables={{
-          productId: this.props.productId,
-          skip: page * reviewsPerPage - reviewsPerPage,
-          first: reviewsPerPage,
-        }}
-      >
-        {({ data, error, loading }) => {
-          if (loading) return <p>Loading...</p>;
-          if (error) return <Error error={error} />;
-          {
-            /* console.log(data); */
-          }
-          const { reviews } = data;
-          return (
-            <ReviewsStyles background={"#BEEDEB"}>
-              <h2>Reviews For {this.props.name}</h2>
-              <ReviewsPagination
-                productId={this.props.productId}
-                getPage={this.getPage}
-                page={this.state.page}
-              />
-              {reviews.map((review) => {
-                return <SingleReview key={review.id} review={review} />;
-              })}
-            </ReviewsStyles>
-          );
-        }}
-      </Query>
+      <ReviewsStyles background={"#BEEDEB"}>
+        <h2>Reviews For {this.props.name}</h2>
+
+        <ReviewsPagination
+          productId={this.props.productId}
+          getPage={this.getPage}
+          page={this.state.page}
+        />
+
+        <Query
+          query={FETCH_PRODUCT_REVIEWS}
+          variables={{
+            productId: this.props.productId,
+            skip: page * reviewsPerPage - reviewsPerPage,
+            first: reviewsPerPage,
+          }}
+        >
+          {({ data, error, loading }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <Error error={error} />;
+
+            const { reviews } = data;
+            return (
+              <>
+                {reviews.map((review) => {
+                  return <SingleReview key={review.id} review={review} />;
+                })}
+              </>
+            );
+          }}
+        </Query>
+      </ReviewsStyles>
     );
   }
 }

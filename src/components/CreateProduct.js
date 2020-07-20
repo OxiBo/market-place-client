@@ -12,7 +12,7 @@ import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
 import { CREATE_PRODUCT } from "../utils/operations";
 
-const ProductForm = styled(Form)``;
+// const ProductForm = styled(Form)``;
 
 const Input = styled.input`
   width: 90%;
@@ -132,15 +132,13 @@ class CreateProduct extends Component {
                   return errors;
                 }}
                 onSubmit={async (values, { setSubmitting }) => {
-                  {
-                    /* console.log(values); */
-                  }
+                
                   try {
                     createProductMutation({ variables: { data: values } });
                     this.props.history.push("/");
-                    {
+                    
                       /* setSubmitting(false); */
-                    }
+                    
                   } catch (error) {
                     console.error(error);
                   }
@@ -161,9 +159,7 @@ class CreateProduct extends Component {
                   setFieldValue,
                   /* and other goodies */
                 }) => {
-                  {
-                    /* const { name, email, password } = values; */
-                  }
+               
                   return (
                     <Form>
                       <h2>Create New Product</h2>
@@ -305,10 +301,6 @@ class CreateProduct extends Component {
                             Submit
                           </Button>
                         </Buttons>
-
-                        {/* <Button type="submit" disabled={isSubmitting}>
-                Submit
-              </Button> */}
                       </form>
                     </Form>
                   );

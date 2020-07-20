@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Mutation } from "react-apollo";
 
-import { DELETE_PRODUCT, FETCH_PRODUCTS } from "../utils/operations";
+import { DELETE_PRODUCT } from "../utils/operations";
 import { ItemButton } from "./Item";
 
 class DeleteButton extends Component {

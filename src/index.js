@@ -20,6 +20,9 @@ import App from "./components/App";
 import requireSellerAuth from "./components/HOC/requireSellerAuth";
 import Homepage from "./components/Homepage";
 import UserProfile from "./components/UserProfile";
+import RequestReset from "./components/RequestReset";
+import ResetPassword from "./components/ResetPassword";
+import Seller from "./components/Seller";
 import SingleItem from "./components/SingleItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
@@ -70,10 +73,6 @@ const link = split(
 // console.log(document.cookie > 0)
 // https://www.howtographql.com/react-apollo/5-authentication/
 const authLink = setContext((_, { headers }) => {
-  // console.log({
-  //   ...headers,
-  //   authorization: token ? `Bearer ${token}` : "",
-  // },)
   // console.log(document.cookie)
   const token = document.cookie
     ? document.cookie
@@ -121,7 +120,11 @@ ReactDOM.render(
           <App>
             <Route exact path="/" component={Homepage} />
             <Route path="/login" exact component={Login} />
+            <Route path="/request-reset" exact component={RequestReset} />
+            <Route path="/reset" exact component={ResetPassword} />
             <Route exact path="/user-profile/:id" component={UserProfile} />
+            {/* public seller profile */}
+            <Route exact path="/seller/:id" component={Seller} />
             <Route
               exact
               path="/sell"

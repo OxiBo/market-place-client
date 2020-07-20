@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import gql from "graphql-tag";
-import { graphql, Query } from "react-apollo";
+import { /*graphql,*/ Query } from "react-apollo";
 // import { gql } from "apollo-boost"
 // import Helmet from 'react-helmet'
 import styled from "styled-components";
@@ -12,8 +12,7 @@ import { perPage } from "../configVars";
 
 import {
   FETCH_PRODUCTS,
-  PRODUCT_SUBSCRIPTION,
-  FETCH_USER_PROFILE,
+  PRODUCT_SUBSCRIPTION
 } from "../utils/operations";
 
 const ItemsList = styled.div`
@@ -74,7 +73,7 @@ class Homepage extends Component {
     });
   };
   render() {
-    // console.log(this.props);
+    // console.log(this.props.location);
     const page = this.props.location.search.split("=")[1];
     return (
       <InnerContainer>
@@ -87,6 +86,7 @@ class Homepage extends Component {
         >
           {({ data, loading, error, subscribeToMore }) => {
             if (loading) return <p>Loading...</p>;
+            console.log(error)
             if (error) return <Error error={error} />;
 
             this.subscribeToNewProducts(subscribeToMore);

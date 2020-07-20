@@ -55,6 +55,9 @@ const ItemStyles = styled.div`
     /* padding: 0 3rem; */
     font-size: 1.5rem;
   }
+  a{
+    text-decoration: none;
+  }
   span {
     font-size: 2rem;
     padding: 0.5rem;
@@ -96,16 +99,16 @@ class Item extends Component {
       <ItemStyles key={id}>
         <h2>{name}</h2>
         <div className="rating">
-          {" "}
+          
           {rating ? (
             <>
-              {" "}
+              
               <p>Rating:</p>
               <h4>{rating}</h4>
             </>
           ) : (
             <p>Nobody rated the product yet</p>
-          )}{" "}
+          )}
         </div>
         {/* TODO - delete description && before production, some products in dev database do not have description */}
         {/* <p>{description && description}</p> */}
@@ -123,12 +126,12 @@ class Item extends Component {
         <div>
           {" "}
           <p>
-            Sold by <span>{seller.name}</span>
+            Sold by <a href={`/seller/${seller.id}`}><span>{seller.name}</span></a>
           </p>
         </div>
         <ItemButtons>
           <Link to={`/item/${id}`}>
-            {" "}
+          
             <ItemButton>View </ItemButton>
           </Link>
 

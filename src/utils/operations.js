@@ -193,6 +193,45 @@ export const SIGNUP_SELLER = gql`
   }
 `;
 
+export const REQUEST_RESET = gql`
+  mutation REQUEST_RESET($email: String!, $type: String!) {
+    requestReset(email: $email, type: $type) {
+      message
+    }
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation RESET_PASSWORD(
+    $type: String!
+    $password: String!
+    $resetToken: String!
+  ) {
+    resetPassword(
+      type: $type
+      password: $password
+      resetToken: $resetToken
+    ) {
+      ... on UserAuthPayLoad {
+        token
+        user {
+          id
+          type
+          name
+        }
+      }
+      ... on SellerAuthPayLoad {
+        token
+        seller {
+          id
+          type
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const FETCH_USER_PROFILE = gql`
   query {
     meUser {
@@ -201,6 +240,16 @@ export const FETCH_USER_PROFILE = gql`
       email
       age
       type
+    }
+  }
+`;
+
+export const SELLER_PUBLIC_PROFILE = gql`
+  query SELLER_PUBLIC_PROFILE($id: ID!) {
+    seller(id: $id) {
+      id
+      name
+      email
     }
   }
 `;

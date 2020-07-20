@@ -9,3 +9,7 @@ Formik - use for form validation - https://jaredpalmer.com/formik/docs/overview
 (use in inside mutation component to access variables, call mutation in onSubmit)
 
 FETCH REVIEWS query gave me an error because the query needed to fetch product id along with review and the needed fields - https://stackoverflow.com/questions/44403930/error-network-error-error-writing-result-to-store-for-query-apollo-client  , https://github.com/apollographql/react-apollo/issues/1656
+
+disable a form while waiting for the answer from backend - https://courses.wesbos.com/account/access/5de58bb4c940036476995e89/view/289543100  min24
+
+update function in mutation - https://courses.wesbos.com/account/access/5de58bb4c940036476995e89/view/289549089  min 8
