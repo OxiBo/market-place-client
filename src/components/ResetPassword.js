@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Formik } from "formik";
 // import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
-
+import { toast } from "react-toastify";
+import { toastOptions, errorToastStyle } from "./styled/toastifyStyles";
 import styled from "styled-components";
 // import { instanceOf } from "prop-types";
 import { withCookies } from "react-cookie";
@@ -13,7 +14,8 @@ import Error from "./ErrorMessage";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
-import { RESET_PASSWORD, LOGIN_USER, LOGIN_SELLER } from "../utils/operations";
+import { RESET_PASSWORD } from "../utils/operations";
+import saveAuthToCookies from "../utils/saveAuthToCookies";
 
 const AuthContainer = styled.div`
   width: 90%;
@@ -34,7 +36,7 @@ class ResetPassword extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   render() {
@@ -48,6 +50,11 @@ class ResetPassword extends Component {
           // https://www.apollographql.com/docs/react/api/react-components/
         >
           {(resetPassword, { loading, error, called }) => {
+            const notify = () => {
+              toast("Success!You have changed your password!", toastOptions);
+              this.props.history.push("/");
+              return false;
+            };
             return (
               <>
                 <Helmet>
@@ -56,9 +63,7 @@ class ResetPassword extends Component {
                 {error && <Error error={error} />}
                 {loading && <div>Loading....</div>}
                 {/* TODO - implement tostify message or a message informing that reset link has been sent to the email provided */}
-                {!error && !loading && called && (
-                  <p>Password has been reset!</p>
-                )}
+                {!error && !loading && called && notify()}
 
                 <Formik
                   initialValues={{
@@ -88,24 +93,31 @@ class ResetPassword extends Component {
                     return errors;
                   }}
                   onSubmit={async (values, { setSubmitting }) => {
-                    const type = this.props.location.search
+                    const userType = this.props.location.search
                       .split("?")
                       .find((row) => row.startsWith("type"))
                       .split("=")[1];
+
                     const resetToken = this.props.location.search
                       .split("?")
                       .find((row) => row.startsWith("resetToken"))
                       .split("=")[1];
                     try {
-                    const res =  await resetPassword({
+                      const res = await resetPassword({
                         variables: {
-                          type,
+                          type: userType,
                           password: values.password,
                           resetToken,
                         },
                       }); // https://stackoverflow.com/questions/54574000/how-to-pass-variables-to-an-apollo-mutation-component
 
-                      console.log(res)
+                      const { id, type, name } =
+                        res.data.resetPassword.seller ||
+                        res.data.resetPassword.user;
+                      const { token } = res.data.resetPassword;
+
+                      const { cookies } = this.props;
+                      saveAuthToCookies(cookies, token, id, name, type);
                     } catch (error) {
                       console.error(error);
                     }

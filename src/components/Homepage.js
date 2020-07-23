@@ -86,7 +86,7 @@ class Homepage extends Component {
         >
           {({ data, loading, error, subscribeToMore }) => {
             if (loading) return <p>Loading...</p>;
-            console.log(error)
+            {/* console.log(error) */}
             if (error) return <Error error={error} />;
 
             this.subscribeToNewProducts(subscribeToMore);

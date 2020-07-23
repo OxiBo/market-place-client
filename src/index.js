@@ -28,7 +28,9 @@ import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
 // import "./App.css";
 import * as serviceWorker from "./serviceWorker";
-
+// flesh messages
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ApolloProvider, ApolloConsumer } from "react-apollo";
 
 // const client = new ApolloBoost({
@@ -73,7 +75,21 @@ const link = split(
 // console.log(document.cookie > 0)
 // https://www.howtographql.com/react-apollo/5-authentication/
 const authLink = setContext((_, { headers }) => {
-  // console.log(document.cookie)
+  // console.log(document.cookie);
+  // const getToken = document.cookie
+  //   .split("; ")
+  //   .find((row) => row.startsWith("token"));
+  // // console.log(getToken);
+
+  // if (getToken) {
+  //   const token = getToken.split("=")[1];
+  //   return {
+  //     headers: {
+  //       ...headers,
+  //       authorization: token ? `Bearer ${token}` : "",
+  //     },
+  //   };
+  // }
   const token = document.cookie
     ? document.cookie
         .split("; ")
@@ -81,7 +97,7 @@ const authLink = setContext((_, { headers }) => {
         .split("=")[1]
     : ""; // get cookie - https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
 
-  // console.log(token)
+  // console.log(token);
   return {
     headers: {
       ...headers,
@@ -116,6 +132,17 @@ ReactDOM.render(
   <CookiesProvider>
     <ApolloProvider client={client}>
       <BrowserRouter>
+        <ToastContainer
+          position="top-center"
+          autoClose={15000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
         <Switch>
           <App>
             <Route exact path="/" component={Homepage} />

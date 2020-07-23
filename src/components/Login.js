@@ -19,6 +19,7 @@ import {
   SIGNUP_USER,
   SIGNUP_SELLER,
 } from "../utils/operations";
+import saveAuthToCookies from "../utils/saveAuthToCookies";
 
 const AuthContainer = styled.div`
   width: 90%;
@@ -50,7 +51,6 @@ class Login extends Component {
     error: null,
   };
   _confirm = async (data) => {
-    // console.log(data);
     const { token, user, seller } =
       this.state.role === "BUYER"
         ? this.state.login
@@ -61,26 +61,11 @@ class Login extends Component {
         : data.createSeller;
 
     const { name, id, type } = user || seller;
-    this._saveAuthData(
-      token,
-      name,
-      id,
-      type
-      // (user && user.name) || (seller && seller.name),
-      // (user && user.id) || (seller && seller.id),
-      // (user && user.type) || (seller && seller.type),
-    );
+    const { cookies } = this.props;
+    saveAuthToCookies(cookies, token, id, name, type);
     this.props.history.push("/");
   };
 
-  _saveAuthData = (token, name, id, type) => {
-    const { cookies } = this.props;
-    // console.log(type);
-    cookies.set("token", token, { path: "/" });
-    cookies.set("id", id, { path: "/" });
-    cookies.set("name", name, { path: "/" });
-    cookies.set("type", type, { path: "/" });
-  };
   render() {
     const { login, role } = this.state;
     return (
@@ -278,7 +263,7 @@ class Login extends Component {
                               <Link to="/request-reset">forgot password?</Link>
                             </LinkButton>
                             <Button
-                            type="button"
+                              type="button"
                               onClick={() => {
                                 this.props.history.goBack(); // TODO - check when in redirects if there were error messages while logging in
                               }}

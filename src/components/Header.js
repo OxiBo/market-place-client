@@ -94,6 +94,7 @@ class Header extends Component {
   }
 
   render() {
+    // TODO - check out getAll property
     const { cookies } = this.props;
     const authToken = cookies.get("token");
     const userName = cookies.get("name");

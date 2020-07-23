@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Formik } from "formik";
 // import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
-
+import { toast } from "react-toastify";
+import { toastOptions, errorToastStyle } from "./styled/toastifyStyles";
 import styled from "styled-components";
 // import { instanceOf } from "prop-types";
 import { withCookies } from "react-cookie";
@@ -28,18 +29,18 @@ const AuthContainer = styled.div`
 `;
 
 class RequestReset extends Component {
-  state = {
-    // role: "BUYER", //??
-    // error: null,
-  };
-
   render() {
-    // const { login, role } = this.state;
+    const notify = () => {
+      toast("Success! Check your email for a reset link!", toastOptions);
+      this.props.history.push("/");
+      return false;
+    };
     return (
       <AuthContainer>
         <h2>Welcome To Our Marketplace!</h2>
         <Mutation
           mutation={REQUEST_RESET}
+          onCompleted={() => notify()}
 
           // https://www.apollographql.com/docs/react/api/react-components/
         >
@@ -51,10 +52,8 @@ class RequestReset extends Component {
                 </Helmet>
                 {error && <Error error={error} />}
                 {loading && <div>Loading....</div>}
-                {/* TODO - implement tostify message or a message informing that reset link has been sent to the email provided */}
-                {!error && !loading && called && (
-                  <p>Success! Check your email for a reset link!</p>
-                )}
+
+                {/* {!error && !loading && called ? notify() : null} */}
 
                 <Formik
                   initialValues={{

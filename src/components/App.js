@@ -10,7 +10,7 @@ import { withCookies } from "react-cookie";
 import Header from "./Header";
 // import "../App.css";
 
-const theme = {
+export const theme = {
   black: "#393939",
   maxWidth: "700px",
   fontColor: "black",
@@ -20,6 +20,7 @@ const theme = {
   sellerColor: "rgb(172, 97, 158)",
   purpleUnderline: "rgb(172, 97, 158)",
   innerContainerBackground: "rgb(225, 234, 250)", //"#D0F0E1"
+  toastBackground: "rgba(238, 224, 235, 0.9)"
 };
 
 const GlobalStyle = createGlobalStyle`
