@@ -179,6 +179,7 @@ class ResetPassword extends Component {
                                   value={values.confirmPassword}
                                 />
                                 <p>
+                                    {/* passwords no match error handling */}
                                   {(errors.confirmPassword &&
                                     touched.confirmPassword &&
                                     errors.confirmPassword) ||

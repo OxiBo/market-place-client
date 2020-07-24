@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Query, Mutation } from "react-apollo";
-import Helmet from 'react-helmet';
+import Helmet from "react-helmet";
 import { Formik } from "formik";
 import styled from "styled-components";
 import { withCookies } from "react-cookie";
@@ -28,81 +28,34 @@ const Content = styled(InnerContainer)`
     }
   }
 `;
-const defaultState = {
-  update: false, // show update form
-  email: "",
-  password: "",
-  age: "",
-  name: "",
 
-  // cookies: instanceOf(Cookies).isRequired,
-};
 class UserProfile extends Component {
-  state = { ...defaultState, role: this.props.cookies.get("type") };
-
-  componentDidMount() {
-    // console.log(this.props);
-  }
-
-  // handleChange = (event) => {
-  //   event.preventDefault();
-  //   const { name, value, type } = event.target;
-  //   const val = type === "number" ? parseFloat(value) || value : value;
-  //   this.setState({ [name]: val });
-  // };
-
-  _confirm = async (data) => {
-    // console.log(data);
-    // TODO get role from cookies and delete radio buttons from the form
-    const { name } =
-      this.state.role === "BUYER" ? data.updateUser : data.updateSeller;
-
-    this._saveAuthData(name);
-    this.setState(defaultState);
-    const userId = this.props.allCookies.id; // why allCookies??
-    this.props.history.push(`/user-profile/${userId}`);
-  };
-
-  _saveAuthData = (name) => {
-    const { cookies } = this.props;
-
-    cookies.set("name", name, { path: "/" });
+  state = {
+    update: false,
+    role: this.props.cookies.get("type"),
   };
 
   render() {
-    // const { cookies } = this.props;
-
     const { role } = this.state;
     const fetchProfile =
       role === "BUYER" ? FETCH_USER_PROFILE : FETCH_SELLER_PROFILE;
 
-    const updates = { ...this.state };
-    // extract truthy values from state and keep only fields to update profile
-    Object.keys(updates).forEach((key) => {
-      if (!updates[key]) delete updates[key];
-    });
-    delete updates["update"];
-    delete updates["role"];
-
     return (
       <div>
-        {/* {this.renderUserProfile()} */}
         <Query query={fetchProfile}>
           {({ data, loading, error }) => {
             if (loading) return <p>Loading....</p>;
-            if (error) return <p>Error: {error.message}</p>;
+
             if (error) return <Error error={error} />;
 
-            const {
-              name: currentName,
-              email: currentEmail,
-              age: currentAge,
-              password: currentPassword,
-            } = data.meUser || data.meSeller;
+            const { name: currentName, email: currentEmail, age: currentAge } =
+              data.meUser || data.meSeller;
             return (
               <>
                 <InnerContainer>
-                  <Helmet><title>My Profile</title></Helmet>
+                  <Helmet>
+                    <title>My Profile</title>
+                  </Helmet>
                   <Content>
                     <div>
                       <h3>{currentName}</h3>
@@ -120,6 +73,7 @@ class UserProfile extends Component {
                   {this.state.update && (
                     <Mutation
                       mutation={role === "BUYER" ? UPDATE_USER : UPDATE_SELLER}
+                      refetchQueries={[{ query: fetchProfile }]}
                     >
                       {(updateProfileMutation, { loading, error }) => {
                         return (
@@ -131,11 +85,18 @@ class UserProfile extends Component {
                               initialValues={{
                                 name: currentName,
                                 email: currentEmail,
-                                password: currentPassword,
-                                age: currentAge,
+                                password: "",
+                                confirmPassword: "",
+                                age: currentAge || null,
                               }}
                               validate={(values) => {
-                                const { name, email, password, age } = values;
+                                const {
+                                  name,
+                                  email,
+                                  password,
+                                  confirmPassword,
+                                  age,
+                                } = values;
                                 const errors = {};
 
                                 if (
@@ -162,26 +123,59 @@ class UserProfile extends Component {
                                   errors.password =
                                     "Password has to be at least 8 characters long";
                                 }
-                                if(!Number.isInteger(age) || (age < 14 || age > 120)){
-                                  errors.age = "Age has to be an integer not less then 14 or bigger then 120"
+
+                                if (
+                                  confirmPassword &&
+                                  (confirmPassword.length < 8 ||
+                                    confirmPassword.length > 20)
+                                ) {
+                                  errors.confirmPassword =
+                                    "Password has to be at least 8 characters long";
+                                }
+
+                                if (password !== confirmPassword) {
+                                  errors.confirmPassword =
+                                    "Your passwords do not match";
+                                }
+
+                                if (
+                                  !Number.isInteger(age) ||
+                                  age < 14 ||
+                                  age > 120
+                                ) {
+                                  errors.age =
+                                    "Age has to be an integer not less then 14 or bigger then 120";
                                 }
                                 return errors;
                               }}
                               onSubmit={async (values, { setSubmitting }) => {
-                             
-                                await this.setState({ role });
+                                const updates = { ...values };
+                                delete updates.confirmPassword;
+
+                                // delete key value pairs which were not updated by the user
+                                Object.entries(updates).forEach(
+                                  ([key, val]) => {
+                                    if (val === "") {
+                                      delete updates[key];
+                                    }
+                                  }
+                                );
 
                                 try {
                                   const response = await updateProfileMutation({
-                                    variables: {data: values},
+                                    variables: { data: updates },
                                   }); // https://stackoverflow.com/questions/54574000/how-to-pass-variables-to-an-apollo-mutation-component
-                                  this._confirm(response.data);
+                                  {/* console.log(response); */}
+
+                                  this.setState({ update: false });
                                 } catch (error) {
                                   console.error(error);
                                 }
                                 // if call setSubmit(false), the app is giving an error - https://github.com/formik/formik/issues/1449 - charleskoehl commented on Feb 11 •
 
-                                /* setSubmitting(false); */
+                                {
+                                  /* setSubmitting(false); */
+                                }
                               }}
                             >
                               {({
@@ -197,6 +191,7 @@ class UserProfile extends Component {
                                 return (
                                   <Form>
                                     <form onSubmit={handleSubmit}>
+                                      <h2>Update Your Profile!</h2>
                                       <div className="fieldset">
                                         <div>
                                           <label htmlFor="name">Name</label>
@@ -238,7 +233,7 @@ class UserProfile extends Component {
                                         </div>
                                         <div>
                                           <label htmlFor="password">
-                                            Password:{" "}
+                                            Password:
                                           </label>
                                           <div>
                                             <input
@@ -250,6 +245,33 @@ class UserProfile extends Component {
                                               id="password"
                                               placeholder="Enter your password"
                                             />
+                                            <p>
+                                              {errors.password &&
+                                                touched.password &&
+                                                errors.password}
+                                            </p>
+                                          </div>
+                                        </div>
+
+                                        <div>
+                                          <label htmlFor="confirmPassword">
+                                            Confirm Password:
+                                          </label>
+                                          <div>
+                                            <input
+                                              onChange={handleChange}
+                                              onBlur={handleBlur}
+                                              value={values.confirmPassword}
+                                              type="password"
+                                              name="confirmPassword"
+                                              id="confirmPassword"
+                                              placeholder="Confirm Your New Password"
+                                            />
+                                            <p>
+                                              {errors.confirmPassword &&
+                                                touched.confirmPassword &&
+                                                errors.confirmPassword}
+                                            </p>
                                           </div>
                                         </div>
 
@@ -276,34 +298,18 @@ class UserProfile extends Component {
                                         )}
                                       </div>
                                       <Buttons>
-                                        {/* <Mutation
-                                          mutation={
-                                            role === "BUYER"
-                                              ? UPDATE_USER
-                                              : UPDATE_SELLER
-                                          }
-                                          variables={{ data: updates }}
-                                          onCompleted={(data) => {
-                                            this._confirm(data);
-                                          }}
-                                        >
-                                          {(mutation) => {
-                                            return ( */}
-                                        <Button
-                                          type="submit"
-                                          disabled={isSubmitting}
-                                        >
-                                          Submit
-                                        </Button>
-                                        {/* );
-                                          }}
-                                        </Mutation> */}
                                         <Button
                                           onClick={() => {
                                             this.setState({ update: false });
                                           }}
                                         >
                                           Cancel
+                                        </Button>
+                                        <Button
+                                          type="submit"
+                                          disabled={isSubmitting}
+                                        >
+                                          Submit Changes
                                         </Button>
                                       </Buttons>
                                     </form>
@@ -326,9 +332,4 @@ class UserProfile extends Component {
   }
 }
 
-// export default withCookies(
-//   graphql(UPDATE_USER)(
-//     graphql(FETCH_USER_PROFILE)(graphql(FETCH_SELLER_PROFILE)(UserProfile))
-//   )
-// );
 export default withCookies(UserProfile);
