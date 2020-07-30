@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 import Helmet from 'react-helmet'
 import PaginationStyles from "./styled/PaginationStyles";
-import { ALL_PRODUCTS_PAGINATION } from "../utils/operations";
+import { ALL_PRODUCTS_PAGINATION } from "../utils/serverOperations";
 import { perPage } from "../configVars";
 import Error from "./ErrorMessage";
 const Pagination = (props) => {

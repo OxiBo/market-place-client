@@ -13,7 +13,7 @@ import { perPage } from "../configVars";
 import {
   FETCH_PRODUCTS,
   PRODUCT_SUBSCRIPTION
-} from "../utils/operations";
+} from "../utils/serverOperations";
 
 const ItemsList = styled.div`
   display: flex;

@@ -14,7 +14,7 @@ import Error from "./ErrorMessage";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
-import { RESET_PASSWORD } from "../utils/operations";
+import { RESET_PASSWORD } from "../utils/serverOperations";
 import saveAuthToCookies from "../utils/saveAuthToCookies";
 
 const AuthContainer = styled.div`

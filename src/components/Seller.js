@@ -10,7 +10,7 @@ import InnerContainer from "./styled/InnerContainer";
 // import Buttons from "./styled/Buttons";
 // import Form from "./styled/Form";
 
-import { SELLER_PUBLIC_PROFILE } from "../utils/operations";
+import { SELLER_PUBLIC_PROFILE } from "../utils/serverOperations";
 
 const Content = styled(InnerContainer)`
   background-color: #fdfcfc;

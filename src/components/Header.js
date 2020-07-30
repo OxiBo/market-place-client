@@ -1,10 +1,12 @@
 // TODO - check props and /login (bug - offer to logout if logged in user visit the page or logout automatically?  )
 
-
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { Mutation } from "react-apollo";
 import styled from "styled-components";
 import { withCookies, Cookies } from "react-cookie";
+import Cart from "./Cart";
+import { TOGGLE_CART_MUTATION } from "../utils/localOperations";
 
 const Navbar = styled.nav`
   background-color: ${(props) => props.theme.purpleLight};
@@ -102,6 +104,7 @@ class Header extends Component {
     const type = cookies.get("type");
     // console.log(this.props.cookies)
     // console.log(this.props);
+    // console.log(authToken)
     return (
       <Navbar>
         <ul>
@@ -120,6 +123,16 @@ class Header extends Component {
                 <Link to={`/user-profile/${userId}`}>
                   Logged in as {userName}{" "}
                 </Link>
+              </li>
+              <li>
+                <Mutation mutation={TOGGLE_CART_MUTATION}>
+                  {(toggleCart) => (
+                    <a onClick={toggleCart}>
+                      My Cart
+                    </a>
+                  )}
+                </Mutation>
+            
               </li>
               <li>
                 <a
@@ -146,6 +159,7 @@ class Header extends Component {
             </li>
           )}
         </ul>
+        <Cart />
       </Navbar>
     );
   }

@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 // import { Link } from "react-router-dom";
 
 import PaginationStyles from "./styled/PaginationStyles";
-import { ALL_REVIEWS_PAGINATION } from "../utils/operations";
+import { ALL_REVIEWS_PAGINATION } from "../utils/serverOperations";
 import { reviewsPerPage } from "../configVars";
 import Error from "./ErrorMessage"; // ???
 

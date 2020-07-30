@@ -16,6 +16,28 @@ import { CookiesProvider } from "react-cookie";
 
 import "./index.scss";
 import logo from "./logo.svg";
+
+// import "./App.css";
+import * as serviceWorker from "./serviceWorker";
+// flesh messages
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { ApolloProvider, ApolloConsumer } from "react-apollo";
+import { withClientState } from "apollo-link-state";
+// const client = new ApolloBoost({
+//   uri: "http://localhost:8080/",
+// });
+import { ApolloClient } from "apollo-client";
+import { split } from "apollo-link";
+import { setContext } from "apollo-link-context";
+import { getMainDefinition } from "apollo-utilities";
+import { createHttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { WebSocketLink } from "apollo-link-ws";
+import { onError } from "apollo-link-error";
+// import history from "./history.js";
+
 import App from "./components/App";
 import requireSellerAuth from "./components/HOC/requireSellerAuth";
 import Homepage from "./components/Homepage";
@@ -26,27 +48,8 @@ import Seller from "./components/Seller";
 import SingleItem from "./components/SingleItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
-// import "./App.css";
-import * as serviceWorker from "./serviceWorker";
-// flesh messages
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ApolloProvider, ApolloConsumer } from "react-apollo";
 
-// const client = new ApolloBoost({
-//   uri: "http://localhost:8080/",
-// });
-import { ApolloClient } from "apollo-client";
-import { split } from "apollo-link";
-import { setContext } from "apollo-link-context";
-import { getMainDefinition } from "apollo-utilities";
-
-import { onError } from "apollo-link-error";
-import history from "./history.js";
-
-import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { WebSocketLink } from "apollo-link-ws";
+import { CART_OPEN_QUERY } from "./utils/localOperations";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:7070",
@@ -75,35 +78,35 @@ const link = split(
 // console.log(document.cookie > 0)
 // https://www.howtographql.com/react-apollo/5-authentication/
 const authLink = setContext((_, { headers }) => {
-  // console.log(document.cookie);
-  // const getToken = document.cookie
-  //   .split("; ")
-  //   .find((row) => row.startsWith("token"));
-  // // console.log(getToken);
+  console.log(document.cookie);
+  const getToken = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token"));
+  // console.log(getToken);
 
-  // if (getToken) {
-  //   const token = getToken.split("=")[1];
-  //   return {
-  //     headers: {
-  //       ...headers,
-  //       authorization: token ? `Bearer ${token}` : "",
-  //     },
-  //   };
-  // }
-  const token = document.cookie
-    ? document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token"))
-        .split("=")[1]
-    : ""; // get cookie - https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+  if (getToken) {
+    const token = getToken.split("=")[1];
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  }
+  // const token = document.cookie
+  //   ? document.cookie
+  //       .split("; ")
+  //       .find((row) => row.startsWith("token"))
+  //       .split("=")[1]
+  //   : ""; // get cookie - https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
 
   // console.log(token);
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
+  // return {
+  //   headers: {
+  //     ...headers,
+  //     authorization: token ? `Bearer ${token}` : "",
+  //   },
+  // };
 });
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -120,10 +123,40 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
+const cache = new InMemoryCache();
+// https://www.apollographql.com/docs/link/links/state/
+const stateLink = withClientState({
+  cache,
+  resolvers: {
+    Mutation: {
+      toggleCart(_, variables, { cache }) {
+        // read the cartOpen value from the cart
+        const { cartOpen } = cache.readQuery({
+          query: CART_OPEN_QUERY,
+        });
+        console.log(cartOpen);
+        // write the cart State to the opposite
+        const data = {
+          data: { cartOpen: !cartOpen },
+        };
+        cache.writeData(data);
+      },
+    },
+  },
+  defaults: {
+    cartOpen: false,
+  },
+});
+
 const client = new ApolloClient({
   // link: httpLink,
-  link: link.concat(authLink).concat(errorLink).concat(httpLink),
-  cache: new InMemoryCache(),
+  link: link
+    .concat(authLink)
+    .concat(errorLink)
+    .concat(stateLink)
+    .concat(httpLink),
+
+  cache,
 
   dataIdFromObject: (o) => o.id,
 });

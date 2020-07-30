@@ -14,7 +14,7 @@ import Error from "./ErrorMessage";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
-import { REQUEST_RESET } from "../utils/operations";
+import { REQUEST_RESET } from "../utils/serverOperations";
 
 const AuthContainer = styled.div`
   width: 90%;

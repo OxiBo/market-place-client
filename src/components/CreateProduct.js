@@ -10,7 +10,7 @@ import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
-import { CREATE_PRODUCT } from "../utils/operations";
+import { CREATE_PRODUCT } from "../utils/serverOperations";
 
 // const ProductForm = styled(Form)``;
 

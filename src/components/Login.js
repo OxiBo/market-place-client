@@ -18,7 +18,7 @@ import {
   LOGIN_SELLER,
   SIGNUP_USER,
   SIGNUP_SELLER,
-} from "../utils/operations";
+} from "../utils/serverOperations";
 import saveAuthToCookies from "../utils/saveAuthToCookies";
 
 const AuthContainer = styled.div`
@@ -51,6 +51,7 @@ class Login extends Component {
     error: null,
   };
   _confirm = async (data) => {
+  
     const { token, user, seller } =
       this.state.role === "BUYER"
         ? this.state.login
@@ -62,6 +63,7 @@ class Login extends Component {
 
     const { name, id, type } = user || seller;
     const { cookies } = this.props;
+  
     saveAuthToCookies(cookies, token, id, name, type);
     this.props.history.push("/");
   };

@@ -15,7 +15,7 @@ import {
   FETCH_SELLER_PROFILE,
   UPDATE_USER,
   UPDATE_SELLER,
-} from "../utils/operations";
+} from "../utils/serverOperations";
 
 const Content = styled(InnerContainer)`
   background-color: #fdfcfc;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Error from "./ErrorMessage";
 import DeleteButton from "./DeleteButton";
 import ProductReviews from "./ProductReviews";
-import { FETCH_SINGLE_PRODUCT } from "../utils/operations";
+import { FETCH_SINGLE_PRODUCT } from "../utils/serverOperations";
 import { PriceTag } from "./Item";
 // import ProductReview from "./ProductReview";
 import Buttons from "./styled/Buttons";

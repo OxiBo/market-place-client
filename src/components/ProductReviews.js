@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import styled from "styled-components";
 import Error from "./ErrorMessage";
-import { FETCH_PRODUCT_REVIEWS } from "../utils/operations";
+import { FETCH_PRODUCT_REVIEWS } from "../utils/serverOperations";
 import InnerContainer from "./styled/InnerContainer";
 import SingleReview from "./SingleReview";
 import ReviewsPagination from "./ReviewsPagination";
