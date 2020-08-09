@@ -2,11 +2,14 @@
 
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import styled from "styled-components";
 import { withCookies, Cookies } from "react-cookie";
+
 import Cart from "./Cart";
+import CartCount from "./CartCount";
 import { TOGGLE_CART_MUTATION } from "../utils/localOperations";
+import { CART_ITEMS_QUERY } from "../utils/serverOperations";
 
 const Navbar = styled.nav`
   background-color: ${(props) => props.theme.purpleLight};
@@ -15,7 +18,7 @@ const Navbar = styled.nav`
   color: white;
   margin: 0 0 3rem 0;
   width: 100%;
-  ul {
+  ul.navbar {
     display: flex;
     justify-content: space-around;
 
@@ -107,7 +110,7 @@ class Header extends Component {
     // console.log(authToken)
     return (
       <Navbar>
-        <ul>
+        <ul className="navbar">
           <Brand>BRAND</Brand>
           <li>
             <Link to="/">Home</Link>
@@ -124,16 +127,29 @@ class Header extends Component {
                   Logged in as {userName}{" "}
                 </Link>
               </li>
-              <li>
-                <Mutation mutation={TOGGLE_CART_MUTATION}>
-                  {(toggleCart) => (
-                    <a onClick={toggleCart}>
-                      My Cart
-                    </a>
-                  )}
-                </Mutation>
-            
-              </li>
+              {type === "BUYER" && (
+                <li>
+                  <Mutation mutation={TOGGLE_CART_MUTATION}>
+                    {(toggleCart) => <a onClick={toggleCart}>My Cart</a>}
+                  </Mutation>
+                  <Query query={CART_ITEMS_QUERY}>
+                    {({ data, error, loading }) => {
+                      {
+                        /* console.log(data); */
+                      }
+                   
+                      if (loading) return <p>...</p>;
+                    
+                      if (data) {
+                        console.log(data);
+                        return <CartCount count={data} />;
+                      }
+
+                      return null;
+                    }}
+                  </Query>
+                </li>
+              )}
               <li>
                 <a
                   href=""
@@ -159,7 +175,7 @@ class Header extends Component {
             </li>
           )}
         </ul>
-        <Cart />
+        {type === "BUYER" && <Cart />}
       </Navbar>
     );
   }

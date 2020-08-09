@@ -1,22 +1,26 @@
 import React, { Component } from "react";
+import { Mutation } from "react-apollo";
 import { Link } from "react-router-dom";
 import { withCookies } from "react-cookie";
+import AddToOrder from "./AddToOrder";
 import styled from "styled-components";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
+import ItemButton from "./styled/ItemButton";
 import DeleteButton from "./DeleteButton";
+import { noImage } from "../utils/utilVars";
 
 const ItemButtons = styled(Buttons)`
   flex-wrap: nowrap !important;
 `;
-export const ItemButton = styled(Button)`
-  height: 2rem;
-  font-size: 1rem;
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
+// export const ItemButton = styled(Button)`
+//   height: 2rem;
+//   font-size: 1rem;
+//   a {
+//     color: inherit;
+//     text-decoration: none;
+//   }
+// `;
 
 const ItemStyles = styled.div`
   background: white;
@@ -44,7 +48,7 @@ const ItemStyles = styled.div`
     padding: 0.5rem;
     /* height: 3rem; */
   }
-  div.rating{
+  div.rating {
     justify-content: space-evenly;
     margin-bottom: 1rem;
   }
@@ -55,7 +59,7 @@ const ItemStyles = styled.div`
     /* padding: 0 3rem; */
     font-size: 1.5rem;
   }
-  a{
+  a {
     text-decoration: none;
   }
   span {
@@ -99,10 +103,8 @@ class Item extends Component {
       <ItemStyles key={id}>
         <h2>{name}</h2>
         <div className="rating">
-          
           {rating ? (
             <>
-              
               <p>Rating:</p>
               <h4>{rating}</h4>
             </>
@@ -112,13 +114,7 @@ class Item extends Component {
         </div>
         {/* TODO - delete description && before production, some products in dev database do not have description */}
         {/* <p>{description && description}</p> */}
-        <img
-          src={
-            image ||
-            "https://res.cloudinary.com/di0hg10hd/image/upload/v1594237808/sickfits/n0t4uceatjy5jdoee9p0.png"
-          }
-          alt={name}
-        />
+        <img src={image || noImage} alt={name} />
         <div>
           <p>{stock > 0 ? "in stock" : "not in stock"}</p>
         </div>
@@ -126,16 +122,18 @@ class Item extends Component {
         <div>
           {" "}
           <p>
-            Sold by <a href={`/seller/${seller.id}`}><span>{seller.name}</span></a>
+            Sold by{" "}
+            <a href={`/seller/${seller.id}`}>
+              <span>{seller.name}</span>
+            </a>
           </p>
         </div>
         <ItemButtons>
           <Link to={`/item/${id}`}>
-          
             <ItemButton>View </ItemButton>
           </Link>
 
-          {type === "BUYER" && <ItemButton>Add To Cart</ItemButton>}
+          {type === "BUYER" && <AddToOrder id={id} />}
           {sellerId === seller.id && (
             <DeleteButton id={id}>Delete</DeleteButton>
           )}

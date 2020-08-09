@@ -58,6 +58,9 @@ const Inner = styled.div`
   margin: 0 auto;
   padding: 2rem;
   font-size: 1.5rem;
+  @media only screen and (min-width: 768px) {
+    max-width: 70%;
+  }
 `;
 
 class App extends Component {

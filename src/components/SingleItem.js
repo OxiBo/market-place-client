@@ -10,7 +10,8 @@ import { PriceTag } from "./Item";
 // import ProductReview from "./ProductReview";
 import Buttons from "./styled/Buttons";
 import Button from "./styled/Button";
-import { ItemButton } from "./Item";
+import  ItemButton  from "./styled/ItemButton";
+import AddToOrder from './AddToOrder'
 
 const SingleItemStyles = styled.div`
   background-color: ${(props) => props.theme.innerContainerBackground};
@@ -215,7 +216,7 @@ class SingleItem extends Component {
                         Delete This Product
                       </DeleteButton>
                     )}
-                    {type === "BUYER" && <ItemButton>Add To Cart</ItemButton>}
+                    {type === "BUYER" && <AddToOrder id={id}/>}
                   </Buttons>
                 </ProductInfo>
               </SingleItemStyles>

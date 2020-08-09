@@ -64,13 +64,13 @@ class CreateProduct extends Component {
     return (
       <Mutation mutation={CREATE_PRODUCT}>
         {(createProductMutation, { error, loading }) => {
-          if (loading) return <div>Loading...</div>;
-          if (error) return <Error error={error} />;
           return (
             <InnerContainer>
               <Helmet>
                 <title>Create New Product</title>
               </Helmet>
+              {error && <Error error={error} />}
+              {loading && <div>Loading....</div>}
               <Formik
                 initialValues={{
                   name: "",
@@ -132,13 +132,16 @@ class CreateProduct extends Component {
                   return errors;
                 }}
                 onSubmit={async (values, { setSubmitting }) => {
-                
                   try {
-                    createProductMutation({ variables: { data: values } });
-                    this.props.history.push("/");
-                    
-                      /* setSubmitting(false); */
-                    
+                    const res = await createProductMutation({
+                      variables: { data: values },
+                    });
+                    console.log(res);
+                    this.props.history.push(
+                      `/item/${res.data.createProduct.id}`
+                    );
+
+                    /* setSubmitting(false); */
                   } catch (error) {
                     console.error(error);
                   }
@@ -159,7 +162,6 @@ class CreateProduct extends Component {
                   setFieldValue,
                   /* and other goodies */
                 }) => {
-               
                   return (
                     <Form>
                       <h2>Create New Product</h2>

@@ -78,7 +78,7 @@ const link = split(
 // console.log(document.cookie > 0)
 // https://www.howtographql.com/react-apollo/5-authentication/
 const authLink = setContext((_, { headers }) => {
-  console.log(document.cookie);
+  // console.log(document.cookie);
   const getToken = document.cookie
     .split("; ")
     .find((row) => row.startsWith("token"));
@@ -134,7 +134,7 @@ const stateLink = withClientState({
         const { cartOpen } = cache.readQuery({
           query: CART_OPEN_QUERY,
         });
-        console.log(cartOpen);
+        // console.log(cartOpen);
         // write the cart State to the opposite
         const data = {
           data: { cartOpen: !cartOpen },
@@ -155,9 +155,7 @@ const client = new ApolloClient({
     .concat(errorLink)
     .concat(stateLink)
     .concat(httpLink),
-
   cache,
-
   dataIdFromObject: (o) => o.id,
 });
 

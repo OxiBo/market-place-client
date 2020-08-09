@@ -3,7 +3,7 @@
 import React from "react";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
-import Helmet from 'react-helmet'
+import Helmet from "react-helmet";
 import PaginationStyles from "./styled/PaginationStyles";
 import { ALL_PRODUCTS_PAGINATION } from "../utils/serverOperations";
 import { perPage } from "../configVars";
@@ -13,20 +13,15 @@ const Pagination = (props) => {
     <Query query={ALL_PRODUCTS_PAGINATION}>
       {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>;
-
         if (error) return <Error error={error} />;
-        {
-          /* console.log(data); */
-        }
+
         const count = data.productsConnection.aggregate.count;
         const pages = Math.ceil(count / perPage);
         const page = props.page;
         return (
           <PaginationStyles>
             <Helmet>
-              <title>
-                {`All Products! - Page ${page} of ${pages}`}
-              </title>
+              <title>{`All Products! - Page ${page} of ${pages}`}</title>
             </Helmet>
             {/* https://reactrouter.com/web/api/Link */}
             <Link

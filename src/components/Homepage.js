@@ -1,3 +1,5 @@
+// TODO - refactor - delete subscription to new products
+
 import React, { Component } from "react";
 // import gql from "graphql-tag";
 import { /*graphql,*/ Query } from "react-apollo";

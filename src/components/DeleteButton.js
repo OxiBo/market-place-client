@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Mutation } from "react-apollo";
 
 import { DELETE_PRODUCT } from "../utils/serverOperations";
-import { ItemButton } from "./Item";
+import  ItemButton  from "./styled/ItemButton";
 
 class DeleteButton extends Component {
   // use this in mutation component this the function below -   update={this.update}

@@ -207,11 +207,7 @@ export const RESET_PASSWORD = gql`
     $password: String!
     $resetToken: String!
   ) {
-    resetPassword(
-      type: $type
-      password: $password
-      resetToken: $resetToken
-    ) {
+    resetPassword(type: $type, password: $password, resetToken: $resetToken) {
       ... on UserAuthPayLoad {
         token
         user {
@@ -286,6 +282,44 @@ export const UPDATE_SELLER = gql`
       email
 
       type
+    }
+  }
+`;
+
+export const ADD_TO_CART_MUTATION = gql`
+  mutation ADD_TO_CART_MUTATION($id: ID!) {
+    addToOrder(id: $id) {
+      id
+      count
+      product {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const REMOVE_ITEM_FROM_CART = gql`
+mutation REMOVER_ITEM_FROM_CART($id: ID!){
+  removeItemFromOrder(id: $id){
+    id
+  }
+}`;
+
+export const CART_ITEMS_QUERY = gql`
+  query OPEN_CART_QUERY {
+    myCurrentOrder {
+      id
+      items {
+        id
+        count
+        product {
+          id
+          name
+          price
+          image
+        }
+      }
     }
   }
 `;
