@@ -62,6 +62,16 @@ export const FETCH_SINGLE_PRODUCT = gql`
   }
 `;
 
+export const SEARCH_PRODUCT = gql`
+  query SEARCH_PRODUCT($query: String) {
+    products(query: $query) {
+      id
+      name
+      image
+    }
+  }
+`;
+
 export const CREATE_PRODUCT = gql`
   mutation createProduct($data: CreateProductInput!) {
     createProduct(data: $data) {
@@ -110,6 +120,35 @@ export const ALL_PRODUCTS_PAGINATION = gql`
 //     }
 //   }
 // `;
+
+export const FETCH_SELLERS = gql`
+query FETCH_SELLERS($skip: Int = 0, $first: Int = ${perPage} ){
+  sellers(skip: $skip, first: $first, orderBy: createdAt_DESC ){
+    id
+    name
+    email
+  }
+}`;
+
+export const SEARCH_SELLER = gql`
+query SEARCH_SELLER($query: String){
+  sellers(query: $query){
+    id
+    name
+    image
+  }
+}
+`
+
+export const ALL_SELLERS_PAGINATION = gql`
+  query ALL_SELLERS_PAGINATION {
+    sellersConnection {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
 
 export const FETCH_PRODUCT_REVIEWS = gql`
   query FETCH_PRODUCT_REVIEWS($productId: ID, $skip: Int = 0, $first: Int = 4) {
@@ -173,6 +212,7 @@ export const SIGNUP_USER = gql`
         name
         email
         age
+        image
         type
       }
     }
@@ -187,6 +227,7 @@ export const SIGNUP_SELLER = gql`
         id
         name
         email
+        image
         type
       }
     }
@@ -300,11 +341,12 @@ export const ADD_TO_CART_MUTATION = gql`
 `;
 
 export const REMOVE_ITEM_FROM_CART = gql`
-mutation REMOVER_ITEM_FROM_CART($id: ID!){
-  removeItemFromOrder(id: $id){
-    id
+  mutation REMOVER_ITEM_FROM_CART($id: ID!) {
+    removeItemFromOrder(id: $id) {
+      id
+    }
   }
-}`;
+`;
 
 export const CART_ITEMS_QUERY = gql`
   query OPEN_CART_QUERY {

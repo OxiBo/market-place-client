@@ -10,11 +10,12 @@ import Error from "./ErrorMessage";
 import InnerContainer from "./styled/InnerContainer";
 import Item from "./Item";
 import Pagination from "./Pagination";
+import SearchProduct from "./SearchProduct";
 import { perPage } from "../configVars";
 
 import {
   FETCH_PRODUCTS,
-  PRODUCT_SUBSCRIPTION
+  PRODUCT_SUBSCRIPTION,
 } from "../utils/serverOperations";
 
 const ItemsList = styled.div`
@@ -79,8 +80,8 @@ class Homepage extends Component {
     const page = this.props.location.search.split("=")[1];
     return (
       <InnerContainer>
-        
         <h2>Product List</h2>
+        <SearchProduct />
         <Pagination page={parseFloat(page) || 1} />
         <Query
           query={FETCH_PRODUCTS}
@@ -88,7 +89,7 @@ class Homepage extends Component {
         >
           {({ data, loading, error, subscribeToMore }) => {
             if (loading) return <p>Loading...</p>;
-            {/* console.log(error) */}
+           
             if (error) return <Error error={error} />;
 
             this.subscribeToNewProducts(subscribeToMore);
@@ -96,7 +97,7 @@ class Homepage extends Component {
           }}
         </Query>
         <Pagination
-          page={parseFloat(this.props.location.search.split("=")[1]) || 1}
+          page={parseFloat(page || 1)}
         />
       </InnerContainer>
     );

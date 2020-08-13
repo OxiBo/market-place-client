@@ -45,6 +45,7 @@ import UserProfile from "./components/UserProfile";
 import RequestReset from "./components/RequestReset";
 import ResetPassword from "./components/ResetPassword";
 import Seller from "./components/Seller";
+import SellersList from "./components/SellersList";
 import SingleItem from "./components/SingleItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
@@ -180,6 +181,7 @@ ReactDOM.render(
             <Route path="/login" exact component={Login} />
             <Route path="/request-reset" exact component={RequestReset} />
             <Route path="/reset" exact component={ResetPassword} />
+            <Route path="/sellers" exact component={SellersList} />
             <Route exact path="/user-profile/:id" component={UserProfile} />
             {/* public seller profile */}
             <Route exact path="/seller/:id" component={Seller} />

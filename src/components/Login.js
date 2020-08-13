@@ -12,6 +12,7 @@ import Error from "./ErrorMessage";
 // import RequestReset from "./RequestReset";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
+import FormInput from './styled/FormInput'
 import Form from "./styled/Form";
 import {
   LOGIN_USER,
@@ -51,7 +52,6 @@ class Login extends Component {
     error: null,
   };
   _confirm = async (data) => {
-  
     const { token, user, seller } =
       this.state.role === "BUYER"
         ? this.state.login
@@ -63,9 +63,34 @@ class Login extends Component {
 
     const { name, id, type } = user || seller;
     const { cookies } = this.props;
-  
+
     saveAuthToCookies(cookies, token, id, name, type);
     this.props.history.push("/");
+  };
+
+  // https://dev.to/ogwurujohnson/cloudinary-image-upload-the-setup-k3h  , https://blog.logrocket.com/handling-images-with-cloudinary-in-react/
+  uploadFile = async (e, setFieldValue) => {
+    //   console.log(e)
+    // https://www.pluralsight.com/guides/how-to-create-a-simple-form-submit-with-files  , https://developer.mozilla.org/en-US/docs/Web/API/FileList ,   https://javascript.info/formdata
+    const files = e.target.files;
+    // console.log(e)
+    const data = new FormData();
+
+    data.append("file", files[0]);
+    data.append("upload_preset", "sickfits");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/di0hg10hd/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+
+    // https://hackernoon.com/formik-handling-files-and-recaptcha-209cbeae10bc
+    setFieldValue("image", file.secure_url);
+    // setFieldValue("largeImage", file.eager[0].secure_url);
   };
 
   render() {
@@ -99,6 +124,7 @@ class Login extends Component {
                     name: "",
                     email: "",
                     password: "",
+                    image: "", // TODO - default image ???
                     role: "BUYER",
                   }}
                   validate={(values) => {
@@ -155,6 +181,7 @@ class Login extends Component {
                     handleBlur,
                     handleSubmit,
                     isSubmitting,
+                    setFieldValue,
                     /* and other goodies */
                   }) => {
                     return (
@@ -162,25 +189,52 @@ class Login extends Component {
                         <form action="" method="POST" onSubmit={handleSubmit}>
                           <div className="fieldset">
                             {!login && (
-                              <div>
-                                <label htmlFor="name">Name:</label>
+                              <>
                                 <div>
-                                  <input
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    placeholder="Your name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.name}
-                                  />
+                                  <label htmlFor="name">Name:</label>
+                                  <div>
+                                    <input
+                                      type="text"
+                                      name="name"
+                                      id="name"
+                                      placeholder="Your name"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      value={values.name}
+                                    />
 
-                                  <p>
-                                    {" "}
-                                    {errors.name && touched.name && errors.name}
-                                  </p>
+                                    <p>
+                                      {" "}
+                                      {errors.name &&
+                                        touched.name &&
+                                        errors.name}
+                                    </p>
+                                  </div>
                                 </div>
-                              </div>
+
+                                <div>
+                                  <label htmlFor="file">Image:</label>
+                                  <div>
+                                    {" "}
+                                    <FormInput
+                                      type="file"
+                                      id="file"
+                                      name="file"
+                                      placeholder="Upload an image"
+                                      onChange={(e) =>
+                                        this.uploadFile(e, setFieldValue)
+                                      }
+                                    />
+                                    {values.image && (
+                                      <img
+                                        width="200"
+                                        src={values.image}
+                                        alt="Upload Preview"
+                                      />
+                                    )}
+                                  </div>
+                                </div>
+                              </>
                             )}
 
                             <div>

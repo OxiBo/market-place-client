@@ -30,7 +30,7 @@ padding-left: 2rem;
 
 //{ id, count, price, product }
 const CartItem = ({ cartItem: { id, count, product } }) => {
-   console.log(product)
+  
   if (!product)
     return (
       <CartItemStyles>

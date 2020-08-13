@@ -16,6 +16,7 @@ export const theme = {
   fontColor: "black",
   lightGrey: "#E1E1E1",
   purpleLight: "#D3B7CE",
+  hoverOnWhite: "#f5f1f4",
   purple: "purple",
   sellerColor: "rgb(172, 97, 158)",
   purpleUnderline: "rgb(172, 97, 158)",

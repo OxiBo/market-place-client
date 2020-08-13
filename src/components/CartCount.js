@@ -6,6 +6,7 @@ import { CART_ITEMS_QUERY } from "../utils/serverOperations";
 
 const AnimationStyles = styled.span`
   position: relative;
+  display: inline-block;
   .count {
     display: block;
     position: relative;
@@ -29,10 +30,10 @@ const AnimationStyles = styled.span`
   }
 `;
 
-const Counter = styled.div`
+const Counter = styled.span`
   background: ${(props) => props.theme.purple};
   color: white;
-  /* display: inline-block; */
+  display: inline-block;
   border-radius: 50%;
   padding: 0.5rem;
   line-height: 3rem;
@@ -50,10 +51,10 @@ const CartCount = () => {
   return (
     <Query query={CART_ITEMS_QUERY}>
       {({ data, error, loading }) => {
-        const count = data.myCurrentOrder.items.reduce(
+        const count = data.myCurrentOrder ? data.myCurrentOrder.items.reduce(
           (count, item) => count + item.count,
           0
-        );
+        ) : 0;
         return (
           <AnimationStyles>
             <TransitionGroup>

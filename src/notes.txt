@@ -6,6 +6,7 @@ Needed to add previousValues(id) to product subscription payload in graphql sche
 updating CACHE - https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#updating-the-cache
 more about cache - https://github.com/apollographql/apollo-client/pull/4664/files
 https://github.com/apollographql/apollo-client/issues/3909
+
 DELETE ITEM
 in DeleteButton component another way of handling delete and updating product list is using update function in Mutation component like so -  // use this in mutation component this the function below -   update={this.update}
   /* update = (cache, payload) => {

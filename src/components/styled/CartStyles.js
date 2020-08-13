@@ -25,17 +25,16 @@ const CartStyles = styled.div`
   }
   header {
     text-align: center;
-
     border-bottom: 5px solid black;
     padding: 1.5rem;
-    h3 {
+    /* h3 {
       padding: 1.5rem;
       transform: skew(-3deg);
       background: ${(props) => props.theme.purpleLight};
       margin: 0 auto 1rem auto;
       width: 50%;
       text-align: center;
-    }
+    } */
     p {
       color: black;
     }

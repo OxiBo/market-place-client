@@ -9,20 +9,15 @@ import Error from "./ErrorMessage";
 import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
+import FormInput from './styled/FormInput'
 import Form from "./styled/Form";
 import { CREATE_PRODUCT } from "../utils/serverOperations";
 
 // const ProductForm = styled(Form)``;
 
-const Input = styled.input`
-  width: 90%;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  background: white;
-`;
 
 //https://stackoverflow.com/questions/55776961/styled-components-extend-styles-and-change-element-type
-const TextArea = styled(Input).attrs({
+const TextArea = styled(FormInput).attrs({
   as: "textarea",
 })`
   height: 100px;
@@ -136,7 +131,7 @@ class CreateProduct extends Component {
                     const res = await createProductMutation({
                       variables: { data: values },
                     });
-                    console.log(res);
+                    {/* console.log(res); */}
                     this.props.history.push(
                       `/item/${res.data.createProduct.id}`
                     );
@@ -170,7 +165,7 @@ class CreateProduct extends Component {
                           <div>
                             <label htmlFor="name">Product Name:</label>
                             <div>
-                              <Input
+                              <FormInput
                                 type="text"
                                 name="name"
                                 id="name"
@@ -191,7 +186,7 @@ class CreateProduct extends Component {
                             <label htmlFor="file">Image:</label>
                             <div>
                               {" "}
-                              <Input
+                              <FormInput
                                 type="file"
                                 id="file"
                                 name="file"
@@ -213,7 +208,7 @@ class CreateProduct extends Component {
                           <div>
                             <label htmlFor="department">Department Name:</label>
                             <div>
-                              <Input
+                              <FormInput
                                 type="text"
                                 name="department"
                                 id="department"
@@ -232,7 +227,7 @@ class CreateProduct extends Component {
                           <div>
                             <label htmlFor="price">Price:</label>
                             <div>
-                              <Input
+                              <FormInput
                                 type="number"
                                 name="price"
                                 id="price"
@@ -251,7 +246,7 @@ class CreateProduct extends Component {
                             <label htmlFor="stock">Count:</label>
 
                             <div>
-                              <Input
+                              <FormInput
                                 type="number"
                                 step="1"
                                 min="0"

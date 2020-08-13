@@ -165,7 +165,9 @@ class UserProfile extends Component {
                                   const response = await updateProfileMutation({
                                     variables: { data: updates },
                                   }); // https://stackoverflow.com/questions/54574000/how-to-pass-variables-to-an-apollo-mutation-component
-                                  {/* console.log(response); */}
+                                  {
+                                    /* console.log(response); */
+                                  }
 
                                   this.setState({ update: false });
                                 } catch (error) {

@@ -53,6 +53,7 @@ const Navbar = styled.nav`
       text-decoration: none;
       padding: 0.9rem;
       color: white !important;
+      cursor: pointer;
       &:before {
         content: "";
         width: 2px;
@@ -94,9 +95,6 @@ const Brand = styled.h2`
 `;
 
 class Header extends Component {
-  componentDidMount() {
-    // console.log(this.props);
-  }
 
   render() {
     // TODO - check out getAll property
@@ -117,6 +115,7 @@ class Header extends Component {
           </li>
           {authToken ? (
             <>
+            <li><Link to={`/sellers`}>Sellers</Link></li>
               {type === "SELLER" && (
                 <li>
                   <Link to={`/sell`}>sell</Link>
@@ -130,24 +129,23 @@ class Header extends Component {
               {type === "BUYER" && (
                 <li>
                   <Mutation mutation={TOGGLE_CART_MUTATION}>
-                    {(toggleCart) => <a onClick={toggleCart}>My Cart</a>}
-                  </Mutation>
-                  <Query query={CART_ITEMS_QUERY}>
-                    {({ data, error, loading }) => {
-                      {
-                        /* console.log(data); */
-                      }
-                   
-                      if (loading) return <p>...</p>;
-                    
-                      if (data) {
-                        console.log(data);
-                        return <CartCount count={data} />;
-                      }
+                    {(toggleCart) => (
+                      <a onClick={toggleCart}>
+                        My Cart{" "}
+                        <Query query={CART_ITEMS_QUERY}>
+                          {({ data, error, loading }) => {
+                            {/* if (loading) return <p>...</p>; */}
 
-                      return null;
-                    }}
-                  </Query>
+                            if (data) {
+                              return <CartCount count={data} />;
+                            }
+
+                            return null;
+                          }}
+                        </Query>
+                      </a>
+                    )}
+                  </Mutation>
                 </li>
               )}
               <li>
