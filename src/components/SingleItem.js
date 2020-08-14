@@ -8,10 +8,12 @@ import ProductReviews from "./ProductReviews";
 import { FETCH_SINGLE_PRODUCT } from "../utils/serverOperations";
 import { PriceTag } from "./Item";
 // import ProductReview from "./ProductReview";
+import InnerContainer from "./styled/InnerContainer";
 import Buttons from "./styled/Buttons";
 import Button from "./styled/Button";
 import  ItemButton  from "./styled/ItemButton";
 import AddToOrder from './AddToOrder'
+import SearchProduct from './SearchProduct'
 
 const SingleItemStyles = styled.div`
   background-color: ${(props) => props.theme.innerContainerBackground};
@@ -169,7 +171,9 @@ class SingleItem extends Component {
             reviews,
           } = data.product;
           return (
-            <>
+            <InnerContainer>
+              <SearchProduct />
+              <hr />
               <SingleItemStyles>
                 <Visual>
                   <img
@@ -223,7 +227,7 @@ class SingleItem extends Component {
               {this.state.reviews && (
                 <ProductReviews productId={id} name={name} />
               )}
-            </>
+            </InnerContainer>
           );
         }}
       </Query>

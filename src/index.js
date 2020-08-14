@@ -41,6 +41,7 @@ import { onError } from "apollo-link-error";
 import App from "./components/App";
 import requireSellerAuth from "./components/HOC/requireSellerAuth";
 import Homepage from "./components/Homepage";
+import BuyerProfile from "./components/BuyerProfile";
 import UserProfile from "./components/UserProfile";
 import RequestReset from "./components/RequestReset";
 import ResetPassword from "./components/ResetPassword";
@@ -183,6 +184,7 @@ ReactDOM.render(
             <Route path="/reset" exact component={ResetPassword} />
             <Route path="/sellers" exact component={SellersList} />
             <Route exact path="/user-profile/:id" component={UserProfile} />
+            <Route exact path="/buyer-profile/:id" component={BuyerProfile} />
             {/* public seller profile */}
             <Route exact path="/seller/:id" component={Seller} />
             <Route

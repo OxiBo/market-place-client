@@ -131,14 +131,14 @@ query FETCH_SELLERS($skip: Int = 0, $first: Int = ${perPage} ){
 }`;
 
 export const SEARCH_SELLER = gql`
-query SEARCH_SELLER($query: String){
-  sellers(query: $query){
-    id
-    name
-    image
+  query SEARCH_SELLER($query: String) {
+    sellers(query: $query) {
+      id
+      name
+      image
+    }
   }
-}
-`
+`;
 
 export const ALL_SELLERS_PAGINATION = gql`
   query ALL_SELLERS_PAGINATION {
@@ -277,6 +277,7 @@ export const FETCH_USER_PROFILE = gql`
       email
       age
       type
+      image
     }
   }
 `;
@@ -309,7 +310,7 @@ export const UPDATE_USER = gql`
       name
       email
       age
-
+      image
       type
     }
   }

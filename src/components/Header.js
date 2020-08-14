@@ -95,7 +95,6 @@ const Brand = styled.h2`
 `;
 
 class Header extends Component {
-
   render() {
     // TODO - check out getAll property
     const { cookies } = this.props;
@@ -115,16 +114,24 @@ class Header extends Component {
           </li>
           {authToken ? (
             <>
-            <li><Link to={`/sellers`}>Sellers</Link></li>
+              <li>
+                <Link to={`/sellers`}>Sellers</Link>
+              </li>
               {type === "SELLER" && (
                 <li>
                   <Link to={`/sell`}>sell</Link>
                 </li>
               )}
               <li>
-                <Link to={`/user-profile/${userId}`}>
-                  Logged in as {userName}{" "}
-                </Link>
+                {type === "BUYER" ? (
+                  <Link to={`/buyer-profile/${userId}`}>
+                    Logged in as {userName}{" "}
+                  </Link>
+                ) : (
+                  <Link to={`/seller-profile/${userId}`}>
+                    Logged in as {userName}{" "}
+                  </Link>
+                )}
               </li>
               {type === "BUYER" && (
                 <li>
@@ -134,7 +141,9 @@ class Header extends Component {
                         My Cart{" "}
                         <Query query={CART_ITEMS_QUERY}>
                           {({ data, error, loading }) => {
-                            {/* if (loading) return <p>...</p>; */}
+                            {
+                              /* if (loading) return <p>...</p>; */
+                            }
 
                             if (data) {
                               return <CartCount count={data} />;
