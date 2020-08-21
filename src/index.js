@@ -42,14 +42,15 @@ import App from "./components/App";
 import requireSellerAuth from "./components/HOC/requireSellerAuth";
 import Homepage from "./components/Homepage";
 import BuyerProfile from "./components/BuyerProfile";
-import UserProfile from "./components/UserProfile";
+import SellerProfile from "./components/SellerProfile";
 import RequestReset from "./components/RequestReset";
 import ResetPassword from "./components/ResetPassword";
-import Seller from "./components/Seller";
+import SellerPublic from "./components/SellerPublic";
 import SellersList from "./components/SellersList";
 import SingleItem from "./components/SingleItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
+import Order from "./components/Order";
 
 import { CART_OPEN_QUERY } from "./utils/localOperations";
 
@@ -183,16 +184,17 @@ ReactDOM.render(
             <Route path="/request-reset" exact component={RequestReset} />
             <Route path="/reset" exact component={ResetPassword} />
             <Route path="/sellers" exact component={SellersList} />
-            <Route exact path="/user-profile/:id" component={UserProfile} />
+            <Route exact path="/seller-profile/:id" component={SellerProfile} />
             <Route exact path="/buyer-profile/:id" component={BuyerProfile} />
-            {/* public seller profile */}
-            <Route exact path="/seller/:id" component={Seller} />
+            {/* public seller profile  */}
+            <Route exact path="/seller/:id" component={SellerPublic} />
             <Route
               exact
               path="/sell"
               component={requireSellerAuth(CreateProduct)}
             />
             <Route exact path="/item/:id" component={SingleItem} />
+            <Route exact path="/order/:id" component={Order} />
             {/* <Route exact path='/formik-test' component={Basic} /> */}
           </App>
         </Switch>

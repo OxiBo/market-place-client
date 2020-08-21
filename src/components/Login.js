@@ -193,7 +193,7 @@ class Login extends Component {
                                 <div>
                                   <label htmlFor="name">Name:</label>
                                   <div>
-                                    <input
+                                    <FormInput
                                       type="text"
                                       name="name"
                                       id="name"
@@ -240,7 +240,7 @@ class Login extends Component {
                             <div>
                               <label htmlFor="email">Email:</label>
                               <div>
-                                <input
+                                <FormInput
                                   type="email"
                                   name="email"
                                   id="email"
@@ -260,7 +260,7 @@ class Login extends Component {
                               <label htmlFor="password">Password:</label>
 
                               <div>
-                                <input
+                                <FormInput
                                   type="password"
                                   name="password"
                                   id="password"

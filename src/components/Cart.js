@@ -7,6 +7,7 @@ import CloseButton from "./styled/CloseButton";
 import BigHeader from "./styled/BigHeader";
 import Error from "./ErrorMessage";
 import CartItem from "./CartItem";
+import CheckoutAndPay from "./CheckoutAndPay";
 import {
   CART_OPEN_QUERY,
   TOGGLE_CART_MUTATION,
@@ -29,10 +30,15 @@ const Cart = () => (
     {({ toggleCart, localState, myCurrentOrder: { data, error, loading } }) => {
       if (error) return <Error error={error} />;
       if (loading) return <p>Loading...</p>;
-    
+
       const cart = data.myCurrentOrder;
-     
+      {/* console.log(data.myCurrentOrder); */}
       if (!cart) return null; // cart does not open if there are no items in it
+      const totalItems = data.myCurrentOrder.items.reduce(
+        (count, item) => count + item.count,
+        0
+      );
+{/* console.log(calcCartTotalPrice(data.myCurrentOrder.items)) */}
       return (
         <CartStyles open={localState.data.cartOpen}>
           <header>
@@ -53,7 +59,14 @@ const Cart = () => (
             <p>
               $ {calcCartTotalPrice(data.myCurrentOrder.items).toFixed(2) || 0}
             </p>
-            <Button>Checkout</Button>
+
+            <CheckoutAndPay
+              amount={calcCartTotalPrice(data.myCurrentOrder.items)}
+              totalItems={totalItems}
+              image={data.myCurrentOrder.items[0].image}
+            >
+              <Button>Checkout</Button>
+            </CheckoutAndPay>
           </footer>
           );
         </CartStyles>

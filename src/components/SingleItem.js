@@ -14,6 +14,8 @@ import Button from "./styled/Button";
 import  ItemButton  from "./styled/ItemButton";
 import AddToOrder from './AddToOrder'
 import SearchProduct from './SearchProduct'
+import formatMoney from '../utils/formatMoney'
+
 
 const SingleItemStyles = styled.div`
   background-color: ${(props) => props.theme.innerContainerBackground};
@@ -206,7 +208,7 @@ class SingleItem extends Component {
                   <h3>{name}</h3>
                   <hr />
                   <p className="description">{description}</p>
-                  <Price>${price.toFixed(2)}</Price>
+                  <Price>${formatMoney(price)}</Price>
                   <p className="stock">
                     {stock > 0 ? "in stock" : "not in stock"}
                   </p>

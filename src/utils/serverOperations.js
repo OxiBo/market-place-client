@@ -288,6 +288,7 @@ export const SELLER_PUBLIC_PROFILE = gql`
       id
       name
       email
+      image
     }
   }
 `;
@@ -356,6 +357,10 @@ export const CART_ITEMS_QUERY = gql`
       items {
         id
         count
+        name
+        image
+        price
+
         product {
           id
           name
@@ -363,6 +368,45 @@ export const CART_ITEMS_QUERY = gql`
           image
         }
       }
+    }
+  }
+`;
+
+export const CHECKOUT_AND_PAY_MUTATION = gql`
+  mutation CHECKOUT_AND_PAY_MUTATION($token: String!) {
+    checkoutAndPay(token: $token) {
+      id
+      total
+      items {
+        id
+        count
+        price
+        name
+      }
+    }
+  }
+`;
+
+export const FETCH_RECENT_ORDER = gql`
+  query FETCH_RECENT_ORDER($id: ID!) {
+    order(id: $id) {
+      id
+      finishedAt
+      items {
+        product {
+          id
+          seller {
+            id
+            name
+          }
+        }
+        id
+        name
+        image
+        price
+        count
+      }
+      total
     }
   }
 `;

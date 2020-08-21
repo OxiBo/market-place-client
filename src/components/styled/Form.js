@@ -8,10 +8,15 @@ const Form = styled.div`
   border: 1px solid ${(props) => props.theme.lightGrey};
   border-radius: 5px;
   box-shadow: -1px -5px 52px -5px rgba(222, 209, 222, 1);
+  h2 {
+    font-size: 4rem;
+  }
   h3 {
     text-align: center;
     margin: 1rem;
+    font-size: 3rem;
   }
+
   .fieldset {
     display: flex;
     flex-direction: column;
@@ -45,7 +50,6 @@ const Form = styled.div`
         input[type="file"] {
           padding-top: 0.7rem;
           padding-bottom: 0;
-          
         }
         p,
         span {

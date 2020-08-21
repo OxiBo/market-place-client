@@ -24,7 +24,7 @@ const Content = styled(InnerContainer)`
   }
 `;
 
-class Seller extends Component {
+class SellerPublic extends Component {
   componentDidMount() {
     // console.log(this.props);
   }
@@ -32,14 +32,18 @@ class Seller extends Component {
   render() {
     return (
       <div>
-        <Query query={SELLER_PUBLIC_PROFILE}
-        variables={{ id: this.props.match.params.id}}>
+        <Query
+          query={SELLER_PUBLIC_PROFILE}
+          variables={{ id: this.props.match.params.id }}
+        >
           {({ data, loading, error }) => {
             if (loading) return <p>Loading....</p>;
             if (error) return <p>Error: {error.message}</p>;
             if (error) return <Error error={error} />;
-            {/* console.log(data); */}
-            const { name, email, id } = data.seller;
+            {
+              /* console.log(data); */
+            }
+            const { name, email, id, image } = data.seller;
             return (
               <>
                 <InnerContainer>
@@ -48,10 +52,11 @@ class Seller extends Component {
                   </Helmet>
                   <Content>
                     <div>
-                      <p>Seller: </p><h3>{name}</h3>
+                      <img src={image} alt={name} />
                     </div>
                     <div>
-                     {email && <p>Email: {email}</p>} 
+                      <h3>{name}</h3>
+                      {email && <p>Email: {email}</p>}
                     </div>
                   </Content>
                 </InnerContainer>
@@ -64,4 +69,4 @@ class Seller extends Component {
   }
 }
 
-export default withCookies(Seller);
+export default withCookies(SellerPublic);

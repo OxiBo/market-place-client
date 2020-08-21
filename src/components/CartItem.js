@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // import formatMoney from "../lib/formatMoney";
 import RemoveFromCart from "./RemoveFromCart";
 import { noImage } from "../utils/utilVars";
-
+import formatMoney from '../utils/formatMoney'
 const CartItemStyles = styled.li`
   /* background-color: yellow; */
   margin: 0 auto !important;
@@ -46,10 +46,10 @@ const CartItem = ({ cartItem: { id, count, product } }) => {
           <Link to={`/item/${product.id}`}>{product.name}</Link>
         </h3>
         <p>
-          <strong>$ {(product.price * count).toFixed(2)} </strong>
+          <strong>$ {(formatMoney(product.price) * count).toFixed(2)} </strong>
           {" - "}
           <em>
-            {count} &times; $ {product.price.toFixed(2)} each
+            {count} &times; $ {formatMoney(product.price)} each
           </em>
         </p>
       </div>

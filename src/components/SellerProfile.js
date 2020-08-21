@@ -9,9 +9,9 @@ import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
-import FormInput from './styled/FormInput'
+import FormInput from "./styled/FormInput";
 import uploadFile from "../utils/uploadFile";
-import { FETCH_USER_PROFILE, UPDATE_USER } from "../utils/serverOperations";
+import { FETCH_SELLER_PROFILE, UPDATE_SELLER } from "../utils/serverOperations";
 import { noImage } from "../utils/utilVars";
 
 const Content = styled(InnerContainer)`
@@ -21,7 +21,7 @@ const Content = styled(InnerContainer)`
     margin: 0.5rem;
     padding: 1rem;
     h2 {
-      font-size: 3rem;
+      font-size: 4rem;
     }
     p {
       padding: 0.5rem;
@@ -38,18 +38,21 @@ const Content = styled(InnerContainer)`
   }
 `;
 
-class BuyerProfile extends Component {
+class SellerProfile extends Component {
   state = {
     update: false,
     role: this.props.cookies.get("type"),
   };
 
+  // componentDidMount() {
+  //   console.log(this.props);
+  // }
   render() {
     const { role } = this.state;
 
     return (
       <div>
-        <Query query={FETCH_USER_PROFILE}>
+        <Query query={FETCH_SELLER_PROFILE}>
           {({ data, loading, error }) => {
             if (loading) return <p>Loading....</p>;
 
@@ -58,15 +61,17 @@ class BuyerProfile extends Component {
             const {
               name: currentName,
               email: currentEmail,
-              age: currentAge,
               image: currentImage,
-            } = data.meUser;
-            {/* console.log(data.meUser) */}
+            } = data.meSeller;
+            {
+              /* console.log(data); */
+            }
+
             return (
               <>
                 <InnerContainer>
                   <Helmet>
-                    <title>My Profile</title>
+                    <title>{currentName}'s Profile</title>
                   </Helmet>
                   <Content>
                     <div className="image">
@@ -76,12 +81,9 @@ class BuyerProfile extends Component {
                     <div>
                       {" "}
                       <h2>{currentName}</h2>
-                      <p>
-                        <span>Email:</span> {currentEmail}
-                      </p>
-                      {currentAge && (
+                      {currentEmail && (
                         <p>
-                          <span>age:</span> {currentAge}
+                          <span>Email:</span> {currentEmail}
                         </p>
                       )}
                       {!this.state.update && (
@@ -93,8 +95,8 @@ class BuyerProfile extends Component {
                   </Content>
                   {this.state.update && (
                     <Mutation
-                      mutation={UPDATE_USER}
-                      refetchQueries={[{ query: FETCH_USER_PROFILE }]}
+                      mutation={UPDATE_SELLER}
+                      refetchQueries={[{ query: FETCH_SELLER_PROFILE }]}
                     >
                       {(updateProfileMutation, { loading, error }) => {
                         return (
@@ -109,7 +111,6 @@ class BuyerProfile extends Component {
                                 password: "",
                                 confirmPassword: "",
                                 image: "",
-                                age: currentAge || null,
                               }}
                               validate={(values) => {
                                 const {
@@ -117,7 +118,6 @@ class BuyerProfile extends Component {
                                   email,
                                   password,
                                   confirmPassword,
-                                  age,
                                 } = values;
                                 const errors = {};
 
@@ -160,14 +160,6 @@ class BuyerProfile extends Component {
                                     "Your passwords do not match";
                                 }
 
-                                if (
-                                  !Number.isInteger(age) ||
-                                  age < 14 ||
-                                  age > 120
-                                ) {
-                                  errors.age =
-                                    "Age has to be an integer not less then 14 or bigger then 120";
-                                }
                                 return errors;
                               }}
                               onSubmit={async (values, { setSubmitting }) => {
@@ -187,7 +179,9 @@ class BuyerProfile extends Component {
                                   const response = await updateProfileMutation({
                                     variables: { data: updates },
                                   }); // https://stackoverflow.com/questions/54574000/how-to-pass-variables-to-an-apollo-mutation-component
-                                  console.log(response);
+                                  {
+                                    /* console.log(response); */
+                                  }
                                   this.setState({ update: false });
                                 } catch (error) {
                                   console.error(error);
@@ -211,7 +205,7 @@ class BuyerProfile extends Component {
                                 return (
                                   <Form>
                                     <form onSubmit={handleSubmit}>
-                                      <h2>Update Your Profile!</h2>
+                                      <h3>Update Your Profile!</h3>
                                       <div className="fieldset">
                                         <div>
                                           <label htmlFor="name">Name</label>
@@ -317,26 +311,6 @@ class BuyerProfile extends Component {
                                             </p>
                                           </div>
                                         </div>
-
-                                        <div>
-                                          <label htmlFor="age">Age:</label>
-                                          <div>
-                                            <FormInput
-                                              onChange={handleChange}
-                                              onBlur={handleBlur}
-                                              value={values.age}
-                                              type="number"
-                                              name="age"
-                                              id="age"
-                                              placeholder="Enter your age"
-                                            />
-                                            <p>
-                                              {errors.age &&
-                                                touched.age &&
-                                                errors.age}
-                                            </p>
-                                          </div>
-                                        </div>
                                       </div>
                                       <Buttons>
                                         <Button
@@ -373,4 +347,4 @@ class BuyerProfile extends Component {
   }
 }
 
-export default withCookies(BuyerProfile);
+export default withCookies(SellerProfile);

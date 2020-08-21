@@ -9,6 +9,7 @@ import Buttons from "./styled/Buttons";
 import ItemButton from "./styled/ItemButton";
 import DeleteButton from "./DeleteButton";
 import { noImage } from "../utils/utilVars";
+import formatMoney from '../utils/formatMoney'
 
 const ItemButtons = styled(Buttons)`
   flex-wrap: nowrap !important;
@@ -118,7 +119,7 @@ class Item extends Component {
         <div>
           <p>{stock > 0 ? "in stock" : "not in stock"}</p>
         </div>
-        <PriceTag>${price.toFixed(2)}</PriceTag>
+        <PriceTag>${formatMoney(price)}</PriceTag>
         <div>
           {" "}
           <p>

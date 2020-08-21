@@ -17,13 +17,20 @@ const Info = styled.div`
   flex: 1;
   border-left: 2px solid lightgrey;
   a {
+    display: block;
     text-decoration: none;
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 700;
+    margin: 0 auto;
+    color: black;
   }
-  h2 {
+  /* h2 {
     text-align: center;
     font-size: 2rem;
-  }
+  } */
   p {
+    margin: 1rem;
     span {
       font-size: 2rem;
       font-weight: 500;
@@ -37,10 +44,7 @@ const SellerShort = ({ seller: { id, name, image, email } }) => {
     <ListItem>
       <img src={image} alt={name} />
       <Info>
-        <Link to={`/seller/${id}`}>
-          {" "}
-          <h2>{name}</h2>
-        </Link>
+        <Link to={`/seller/${id}`}> {name}</Link>
 
         <p>
           EMAIL: <span>{email}</span>

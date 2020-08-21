@@ -9,12 +9,11 @@ import Error from "./ErrorMessage";
 import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
-import FormInput from './styled/FormInput'
+import FormInput from "./styled/FormInput";
 import Form from "./styled/Form";
 import { CREATE_PRODUCT } from "../utils/serverOperations";
 
 // const ProductForm = styled(Form)``;
-
 
 //https://stackoverflow.com/questions/55776961/styled-components-extend-styles-and-change-element-type
 const TextArea = styled(FormInput).attrs({
@@ -127,11 +126,19 @@ class CreateProduct extends Component {
                   return errors;
                 }}
                 onSubmit={async (values, { setSubmitting }) => {
+                  const price = Number(
+                    Math.round(values.price * 100 + "e2") + "e-2"
+                  ); // https://www.jacklmoore.com/notes/rounding-in-javascript/
+
+                  const variables = { ...values, price: price };
+
                   try {
                     const res = await createProductMutation({
-                      variables: { data: values },
+                      variables: { data: variables },
                     });
-                    {/* console.log(res); */}
+                    {
+                      /* console.log(res); */
+                    }
                     this.props.history.push(
                       `/item/${res.data.createProduct.id}`
                     );
@@ -232,6 +239,7 @@ class CreateProduct extends Component {
                                 name="price"
                                 id="price"
                                 min="0"
+                                step="0.01"
                                 placeholder="Price"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
