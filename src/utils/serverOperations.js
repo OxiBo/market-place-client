@@ -351,7 +351,7 @@ export const REMOVE_ITEM_FROM_CART = gql`
 `;
 
 export const CART_ITEMS_QUERY = gql`
-  query OPEN_CART_QUERY {
+  query CART_ITEMS_QUERY {
     myCurrentOrder {
       id
       items {
@@ -407,6 +407,23 @@ export const FETCH_RECENT_ORDER = gql`
         count
       }
       total
+    }
+  }
+`;
+
+export const FETCH_BUYER_ORDERS = gql`
+  query FETCH_BUYER_ORDERS {
+    myOrders {
+      id
+      total
+      finishedAt
+      items {
+        id
+        name
+        count
+        image
+        price
+      }
     }
   }
 `;

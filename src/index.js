@@ -51,6 +51,7 @@ import SingleItem from "./components/SingleItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
 import Order from "./components/Order";
+import OrdersList from "./components/OrdersList";
 
 import { CART_OPEN_QUERY } from "./utils/localOperations";
 
@@ -195,6 +196,7 @@ ReactDOM.render(
             />
             <Route exact path="/item/:id" component={SingleItem} />
             <Route exact path="/order/:id" component={Order} />
+            <Route exact path="/orders" component={OrdersList} />
             {/* <Route exact path='/formik-test' component={Basic} /> */}
           </App>
         </Switch>

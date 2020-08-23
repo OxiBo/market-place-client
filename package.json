@@ -11,6 +11,7 @@
     "apollo-link-context": "^1.0.20",
     "apollo-link-state": "^0.4.2",
     "apollo-link-ws": "^1.0.20",
+    "date-fns": "^2.15.0",
     "downshift": "^6.0.3",
     "formik": "^2.1.4",
     "glamor": "^2.20.40",

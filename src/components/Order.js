@@ -127,6 +127,7 @@ const Order = (props) => {
                 ))}
               </div>
             </OrderStyles>
+           
           </InnerContainer>
         );
       }}

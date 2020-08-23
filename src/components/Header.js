@@ -117,6 +117,9 @@ class Header extends Component {
               <li>
                 <Link to={`/sellers`}>Sellers</Link>
               </li>
+              <li> 
+                <Link to={`/orders`}>My Orders</Link>
+              </li>
               {type === "SELLER" && (
                 <li>
                   <Link to={`/sell`}>sell</Link>
