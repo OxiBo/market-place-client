@@ -1,3 +1,5 @@
+// TODO wrap in HOC to make sure it can only be accessed by buyers ??
+
 import React from "react";
 import { Link } from "react-router-dom";
 import formatDistance from "date-fns/formatDistance";

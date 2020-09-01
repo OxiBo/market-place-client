@@ -47,7 +47,7 @@ class UserProfile extends Component {
             if (loading) return <p>Loading....</p>;
 
             if (error) return <Error error={error} />;
-
+            console.log(data);
             const { name: currentName, email: currentEmail, age: currentAge } =
               data.meUser || data.meSeller;
             return (

@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { perPage } from "../configVars";
+import { perPage, orderItemsPerPage } from "../configVars";
 
 export const PRODUCT_SUBSCRIPTION = gql`
   subscription {
@@ -278,9 +278,60 @@ export const FETCH_USER_PROFILE = gql`
       age
       type
       image
+      orderItems {
+        name
+        price
+        count
+        order {
+          id
+          finished
+        }
+      }
+      reviews {
+        text
+        rating
+        # product {
+        #   id
+        #   name
+        # }
+      }
     }
   }
 `;
+
+export const FETCH_USER_ORDERITEMS = gql`
+  query FETCH_USER_ORDERITEMS($skip: Int = 0, $first: Int = ${orderItemsPerPage}) {
+    myOrderItems(first: $first, skip: $skip, orderBy: createdAt_DESC) {
+      id
+      name
+      price
+      count
+      image
+      product {
+        id
+        seller{
+          id
+          name
+        }
+      }
+      order {
+        id
+        finishedAt
+      }
+    }
+  }
+`;
+
+export const ALL_USER_ORDERITEMS_PAGINATION = gql`
+  query ALL_USER_ORDERITEMS_PAGINATION($userId: ID!) {
+    orderItemsConnection(where: { user: { id: $userId } }) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 
 export const SELLER_PUBLIC_PROFILE = gql`
   query SELLER_PUBLIC_PROFILE($id: ID!) {

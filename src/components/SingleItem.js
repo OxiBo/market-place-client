@@ -4,10 +4,10 @@ import { withCookies } from "react-cookie";
 import styled from "styled-components";
 import Error from "./ErrorMessage";
 import DeleteButton from "./DeleteButton";
-import ProductReviews from "./ProductReviews";
+
 import { FETCH_SINGLE_PRODUCT } from "../utils/serverOperations";
 import { PriceTag } from "./Item";
-// import ProductReview from "./ProductReview";
+import ProductReviews from "./ProductReviews";
 import InnerContainer from "./styled/InnerContainer";
 import Buttons from "./styled/Buttons";
 import Button from "./styled/Button";
@@ -158,9 +158,8 @@ class SingleItem extends Component {
             /* console.log(data); */
           }
           if (!data.product) return <p>No item found for id:{this.props.id}</p>;
-          {
-            /* console.log(data.product); */
-          }
+         console.log(data.product); 
+          
           const {
             id,
             description,
@@ -170,7 +169,6 @@ class SingleItem extends Component {
             rating,
             seller,
             stock,
-            reviews,
           } = data.product;
           return (
             <InnerContainer>
@@ -238,3 +236,4 @@ class SingleItem extends Component {
 }
 
 export default withCookies(SingleItem);
+export { VisualDivs}

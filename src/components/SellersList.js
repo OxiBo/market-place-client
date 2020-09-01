@@ -9,7 +9,7 @@ import {
 } from "../utils/serverOperations";
 import SellerShort from "./SellerShort";
 import Error from "./ErrorMessage";
-import PaginationTest from "./PaginationTest";
+import PaginationCommon from "./PaginationCommon";
 import SearchSeller from "./SearchSeller";
 import InnerContainer from "./styled/InnerContainer";
 // import { perPage } from "../configVars";
@@ -29,7 +29,7 @@ const SellersList = (props) => {
         <BigHeader>All Sellers</BigHeader>
         <SearchSeller />
       </Header>
-      <PaginationTest
+      <PaginationCommon
         query={ALL_SELLERS_PAGINATION}
         item={"sellers"}
         page={parseFloat(page) || 1}

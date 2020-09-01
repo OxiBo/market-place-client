@@ -63,12 +63,12 @@ const Cart = () => (
             <CheckoutAndPay
               amount={calcCartTotalPrice(data.myCurrentOrder.items)}
               totalItems={totalItems}
-              image={data.myCurrentOrder.items[0].image}
+              image={data.myCurrentOrder.items.length && data.myCurrentOrder.items[0].image}
             >
               <Button>Checkout</Button>
             </CheckoutAndPay>
           </footer>
-          );
+        
         </CartStyles>
       );
     }}

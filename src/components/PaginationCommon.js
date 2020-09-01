@@ -9,14 +9,24 @@ import PaginationStyles from "./styled/PaginationStyles";
 // import { perPage } from "../configVars";
 import Error from "./ErrorMessage";
 const perPage = 2; // for testing
-const PaginationTest = ({ connection, item, page, query, pathname }) => {
+const PaginationCommon = ({
+  connection,
+  item,
+  page,
+  query,
+  queryVariables,
+  pathname,
+}) => {
+  console.log(queryVariables)
   return (
-    <Query query={query}>
+    <Query query={query} variables={queryVariables || {}}>
       {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>;
         if (error) return <Error error={error} />;
 
-        {/* console.log(data[connection].aggregate.count); */}
+        {
+          /* console.log(data[connection].aggregate.count); */
+        }
 
         const count = data[connection].aggregate.count;
         const pages = Math.ceil(count / perPage);
@@ -51,4 +61,4 @@ const PaginationTest = ({ connection, item, page, query, pathname }) => {
     </Query>
   );
 };
-export default PaginationTest;
+export default PaginationCommon;

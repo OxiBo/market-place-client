@@ -17,10 +17,17 @@ in DeleteButton component another way of handling delete and updating product li
     
     cache.writeQuery({ query: FETCH_PRODUCTS, data });
   }; */
-  Since i use subscription in the product list, i did not need this/
+  Since i use subscription in the product list, i did not need this/ 
 
 
 form submit - https://courses.wesbos.com/account/access/5de58bb4c940036476995e89/view/289568304 min 8
 
 
 Success message , logout - https://courses.wesbos.com/account/access/5de58bb4c940036476995e89/view/289572177
+
+
+TESTING
+ -  // mocking withCookies - https://github.com/reactivestack/cookies/blob/master/packages/react-cookie/src/__tests__/withCookies-test.js
+
+ withRouter, MemoryRouter - // https://html.developreference.com/article/13543175/React+Router+Invariant+Violation+test+fails+with+%3CLink%3E+outside+%3CRouter%3E+%5Bduplicate%5D
+// why MemoryRouter - https://github.com/enzymejs/enzyme/issues/1112#issuecomment-447643271

@@ -163,6 +163,8 @@ const client = new ApolloClient({
   dataIdFromObject: (o) => o.id,
 });
 
+// console.log(client)
+
 ReactDOM.render(
   <CookiesProvider>
     <ApolloProvider client={client}>

@@ -1,0 +1,790 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavBar /> renders component with buyer logged in and match snapshot 1`] = `
+<ul
+  className="navbar"
+  data-test="nav"
+>
+  <styled.h2>
+    <h2
+      className="sc-AxhCb iLwveu"
+    >
+      BRAND
+    </h2>
+  </styled.h2>
+  <li>
+    <Link
+      to="/"
+    >
+      <LinkAnchor
+        href="/"
+        navigate={[Function]}
+      >
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/sellers"
+    >
+      <LinkAnchor
+        href="/sellers"
+        navigate={[Function]}
+      >
+        <a
+          href="/sellers"
+          onClick={[Function]}
+        >
+          Sellers
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/orders"
+    >
+      <LinkAnchor
+        href="/orders"
+        navigate={[Function]}
+      >
+        <a
+          href="/orders"
+          onClick={[Function]}
+        >
+          My Orders
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/buyer-profile/lskdjflskdjflskdjflskdf"
+    >
+      <LinkAnchor
+        href="/buyer-profile/lskdjflskdjflskdjflskdf"
+        navigate={[Function]}
+      >
+        <a
+          href="/buyer-profile/lskdjflskdjflskdjflskdf"
+          onClick={[Function]}
+        >
+          Logged in as 
+          Test
+           
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Mutation
+      mutation={
+        Object {
+          "definitions": Array [
+            Object {
+              "directives": Array [],
+              "kind": "OperationDefinition",
+              "name": Object {
+                "kind": "Name",
+                "value": "TODDLE_CART_MUTATION",
+              },
+              "operation": "mutation",
+              "selectionSet": Object {
+                "kind": "SelectionSet",
+                "selections": Array [
+                  Object {
+                    "alias": undefined,
+                    "arguments": Array [],
+                    "directives": Array [
+                      Object {
+                        "arguments": Array [],
+                        "kind": "Directive",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "client",
+                        },
+                      },
+                    ],
+                    "kind": "Field",
+                    "name": Object {
+                      "kind": "Name",
+                      "value": "toggleCart",
+                    },
+                    "selectionSet": Object {
+                      "kind": "SelectionSet",
+                      "selections": Array [
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "cartOpen",
+                          },
+                          "selectionSet": undefined,
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+              "variableDefinitions": Array [],
+            },
+          ],
+          "kind": "Document",
+          "loc": Object {
+            "end": 80,
+            "start": 0,
+          },
+        }
+      }
+    >
+      <a
+        onClick={[Function]}
+      >
+        My Cart
+         
+        <Query
+          query={
+            Object {
+              "definitions": Array [
+                Object {
+                  "directives": Array [],
+                  "kind": "OperationDefinition",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "CART_ITEMS_QUERY",
+                  },
+                  "operation": "query",
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "myCurrentOrder",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "items",
+                              },
+                              "selectionSet": Object {
+                                "kind": "SelectionSet",
+                                "selections": Array [
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "id",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "count",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "name",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "image",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "price",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "product",
+                                    },
+                                    "selectionSet": Object {
+                                      "kind": "SelectionSet",
+                                      "selections": Array [
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "id",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "name",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "price",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "image",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                  "variableDefinitions": Array [],
+                },
+              ],
+              "kind": "Document",
+              "loc": Object {
+                "end": 245,
+                "start": 0,
+              },
+            }
+          }
+        >
+          <CartCount
+            count={
+              Object {
+                "myCurrentOrder": Object {
+                  "__typename": "Order",
+                  "id": "abc123",
+                  "items": Array [
+                    Object {
+                      "__typename": "OrderItem",
+                      "count": 1,
+                      "id": "abc098",
+                      "image": null,
+                      "name": "test jest",
+                      "price": 2222222,
+                      "product": Object {
+                        "__typename": "Product",
+                        "id": "prod_cke0uyoym023q0765s7qaqm9k",
+                        "image": null,
+                        "name": "test jest",
+                        "price": 2222222,
+                      },
+                    },
+                    Object {
+                      "__typename": "OrderItem",
+                      "count": 5,
+                      "id": "qwe098",
+                      "image": null,
+                      "name": "test jest 2",
+                      "price": 1111111,
+                      "product": Object {
+                        "__typename": "Product",
+                        "id": "prod2_cke0uyoym023q0765s7qaqm9k",
+                        "image": null,
+                        "name": "test jest 2",
+                        "price": 1111111,
+                      },
+                    },
+                  ],
+                },
+              }
+            }
+          >
+            <Query
+              query={
+                Object {
+                  "definitions": Array [
+                    Object {
+                      "directives": Array [],
+                      "kind": "OperationDefinition",
+                      "name": Object {
+                        "kind": "Name",
+                        "value": "CART_ITEMS_QUERY",
+                      },
+                      "operation": "query",
+                      "selectionSet": Object {
+                        "kind": "SelectionSet",
+                        "selections": Array [
+                          Object {
+                            "alias": undefined,
+                            "arguments": Array [],
+                            "directives": Array [],
+                            "kind": "Field",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "myCurrentOrder",
+                            },
+                            "selectionSet": Object {
+                              "kind": "SelectionSet",
+                              "selections": Array [
+                                Object {
+                                  "alias": undefined,
+                                  "arguments": Array [],
+                                  "directives": Array [],
+                                  "kind": "Field",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "id",
+                                  },
+                                  "selectionSet": undefined,
+                                },
+                                Object {
+                                  "alias": undefined,
+                                  "arguments": Array [],
+                                  "directives": Array [],
+                                  "kind": "Field",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "items",
+                                  },
+                                  "selectionSet": Object {
+                                    "kind": "SelectionSet",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "id",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "count",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "name",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "image",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "price",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "product",
+                                        },
+                                        "selectionSet": Object {
+                                          "kind": "SelectionSet",
+                                          "selections": Array [
+                                            Object {
+                                              "alias": undefined,
+                                              "arguments": Array [],
+                                              "directives": Array [],
+                                              "kind": "Field",
+                                              "name": Object {
+                                                "kind": "Name",
+                                                "value": "id",
+                                              },
+                                              "selectionSet": undefined,
+                                            },
+                                            Object {
+                                              "alias": undefined,
+                                              "arguments": Array [],
+                                              "directives": Array [],
+                                              "kind": "Field",
+                                              "name": Object {
+                                                "kind": "Name",
+                                                "value": "name",
+                                              },
+                                              "selectionSet": undefined,
+                                            },
+                                            Object {
+                                              "alias": undefined,
+                                              "arguments": Array [],
+                                              "directives": Array [],
+                                              "kind": "Field",
+                                              "name": Object {
+                                                "kind": "Name",
+                                                "value": "price",
+                                              },
+                                              "selectionSet": undefined,
+                                            },
+                                            Object {
+                                              "alias": undefined,
+                                              "arguments": Array [],
+                                              "directives": Array [],
+                                              "kind": "Field",
+                                              "name": Object {
+                                                "kind": "Name",
+                                                "value": "image",
+                                              },
+                                              "selectionSet": undefined,
+                                            },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                      "variableDefinitions": Array [],
+                    },
+                  ],
+                  "kind": "Document",
+                  "loc": Object {
+                    "end": 245,
+                    "start": 0,
+                  },
+                }
+              }
+            >
+              <styled.span>
+                <span
+                  className="sc-AxjAm lmmvdt"
+                >
+                  <TransitionGroup
+                    childFactory={[Function]}
+                    component="div"
+                  >
+                    <div>
+                      <CSSTransition
+                        className="count"
+                        classNames="count"
+                        in={true}
+                        key=".$6"
+                        onExited={[Function]}
+                        timeout={
+                          Object {
+                            "enter": 4000,
+                            "exit": 4000,
+                          }
+                        }
+                        unMountOnExit={true}
+                      >
+                        <Transition
+                          appear={false}
+                          className="count"
+                          enter={true}
+                          exit={true}
+                          in={true}
+                          mountOnEnter={false}
+                          onEnter={[Function]}
+                          onEntered={[Function]}
+                          onEntering={[Function]}
+                          onExit={[Function]}
+                          onExited={[Function]}
+                          onExiting={[Function]}
+                          timeout={
+                            Object {
+                              "enter": 4000,
+                              "exit": 4000,
+                            }
+                          }
+                          unMountOnExit={true}
+                          unmountOnExit={false}
+                        >
+                          <styled.span
+                            className="count"
+                            unMountOnExit={true}
+                          >
+                            <span
+                              className="sc-AxirZ egWJIS count"
+                            >
+                              6
+                            </span>
+                          </styled.span>
+                        </Transition>
+                      </CSSTransition>
+                    </div>
+                  </TransitionGroup>
+                </span>
+              </styled.span>
+            </Query>
+          </CartCount>
+        </Query>
+      </a>
+    </Mutation>
+  </li>
+  <li>
+    <a
+      className=""
+      data-test="logout"
+      href=""
+      onClick={[Function]}
+    >
+      Logout
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`<NavBar /> renders component with seller logged in and match snapshot 1`] = `
+<ul
+  className="navbar"
+  data-test="nav"
+>
+  <styled.h2>
+    <h2
+      className="sc-AxhCb iLwveu"
+    >
+      BRAND
+    </h2>
+  </styled.h2>
+  <li>
+    <Link
+      to="/"
+    >
+      <LinkAnchor
+        href="/"
+        navigate={[Function]}
+      >
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/sellers"
+    >
+      <LinkAnchor
+        href="/sellers"
+        navigate={[Function]}
+      >
+        <a
+          href="/sellers"
+          onClick={[Function]}
+        >
+          Sellers
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/sell"
+    >
+      <LinkAnchor
+        href="/sell"
+        navigate={[Function]}
+      >
+        <a
+          href="/sell"
+          onClick={[Function]}
+        >
+          sell
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Link
+      to="/seller-profile/lskdjflskdjflskdjflskdf"
+    >
+      <LinkAnchor
+        href="/seller-profile/lskdjflskdjflskdjflskdf"
+        navigate={[Function]}
+      >
+        <a
+          href="/seller-profile/lskdjflskdjflskdjflskdf"
+          onClick={[Function]}
+        >
+          Logged in as 
+          Seller
+           
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <a
+      className=""
+      data-test="logout"
+      href=""
+      onClick={[Function]}
+    >
+      Logout
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`<NavBar /> renders component without being logged in and match snapshot 1`] = `
+<ul
+  className="navbar"
+  data-test="nav"
+>
+  <styled.h2>
+    <h2
+      className="sc-AxhCb iLwveu"
+    >
+      BRAND
+    </h2>
+  </styled.h2>
+  <li>
+    <Link
+      to="/"
+    >
+      <LinkAnchor
+        href="/"
+        navigate={[Function]}
+      >
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+  <li>
+    <Link
+      className=""
+      data-test="login"
+      to="/login"
+    >
+      <LinkAnchor
+        className=""
+        data-test="login"
+        href="/login"
+        navigate={[Function]}
+      >
+        <a
+          className=""
+          data-test="login"
+          href="/login"
+          onClick={[Function]}
+        >
+          Login
+        </a>
+      </LinkAnchor>
+    </Link>
+  </li>
+</ul>
+`;

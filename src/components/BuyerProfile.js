@@ -5,11 +5,15 @@ import { Formik } from "formik";
 import styled from "styled-components";
 import { withCookies } from "react-cookie";
 import Error from "./ErrorMessage";
+import OrderedItemsList from "./OrderedItemsList"
 import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
-import FormInput from './styled/FormInput'
+
+
+
+import FormInput from "./styled/FormInput";
 import uploadFile from "../utils/uploadFile";
 import { FETCH_USER_PROFILE, UPDATE_USER } from "../utils/serverOperations";
 import { noImage } from "../utils/utilVars";
@@ -41,6 +45,7 @@ const Content = styled(InnerContainer)`
 class BuyerProfile extends Component {
   state = {
     update: false,
+    openOrderItems: false,
     role: this.props.cookies.get("type"),
   };
 
@@ -49,6 +54,7 @@ class BuyerProfile extends Component {
 
     return (
       <div>
+        
         <Query query={FETCH_USER_PROFILE}>
           {({ data, loading, error }) => {
             if (loading) return <p>Loading....</p>;
@@ -61,7 +67,7 @@ class BuyerProfile extends Component {
               age: currentAge,
               image: currentImage,
             } = data.meUser;
-            {/* console.log(data.meUser) */}
+            console.log(data.meUser);
             return (
               <>
                 <InnerContainer>
@@ -86,9 +92,19 @@ class BuyerProfile extends Component {
                       )}
                       {!this.state.update && (
                         <Button onClick={() => this.setState({ update: true })}>
-                          Update
+                          Update Profile
                         </Button>
                       )}
+                      <Button
+                        onClick={() =>
+                          this.setState((prevState) => ({
+                            openOrderItems: !prevState.openOrderItems,
+                          }))
+                        }
+                      >
+                        {this.state.openOrderItems ? "Hide" : "Show"} ordered
+                        items
+                      </Button>
                     </div>
                   </Content>
                   {this.state.update && (
@@ -363,6 +379,7 @@ class BuyerProfile extends Component {
                       }}
                     </Mutation>
                   )}
+                  {this.state.openOrderItems && <OrderedItemsList userId={data.meUser.id}/>}
                 </InnerContainer>
               </>
             );
