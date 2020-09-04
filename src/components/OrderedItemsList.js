@@ -5,17 +5,17 @@ import {
   FETCH_USER_ORDERITEMS,
 } from "../utils/serverOperations";
 import InnerPagination from "./RenderProp/InnerPagination";
-import SingleOrderItem from "./SingleOrderItem"
+import SingleOrderItem from "./SingleOrderItem";
 import Error from "./ErrorMessage"; // ???
 import SmallContainer from "./styled/SmallContainer";
 import { orderItemsPerPage } from "../configVars";
 
-const OrderedItemsList = () => (
+const OrderedItemsList = ({ userId }) => (
   <SmallContainer>
     <InnerPagination
       query={ALL_USER_ORDERITEMS_PAGINATION}
       variableName={"userId"}
-      variableValue={"ck9x9bp5i02t90765f5wwt8mf"}
+      variableValue={userId}
       perPage={orderItemsPerPage}
       connectionType={"orderItemsConnection"}
     >
@@ -31,8 +31,13 @@ const OrderedItemsList = () => (
             {({ data, error, loading }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <Error error={error} />;
-             
-              return data.myOrderItems.map((item) => <SingleOrderItem item={item} key={item.id}/>);
+
+              return data.myOrderItems.map(
+                (item) =>
+                  console.log(item) || (
+                    <SingleOrderItem item={item} key={item.id} />
+                  )
+              );
             }}
           </Query>
         )

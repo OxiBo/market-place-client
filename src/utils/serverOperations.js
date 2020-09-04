@@ -307,8 +307,10 @@ export const FETCH_USER_ORDERITEMS = gql`
       price
       count
       image
+      reviewed
       product {
         id
+        name
         seller{
           id
           name
@@ -331,7 +333,6 @@ export const ALL_USER_ORDERITEMS_PAGINATION = gql`
     }
   }
 `;
-
 
 export const SELLER_PUBLIC_PROFILE = gql`
   query SELLER_PUBLIC_PROFILE($id: ID!) {
@@ -474,6 +475,19 @@ export const FETCH_BUYER_ORDERS = gql`
         count
         image
         price
+      }
+    }
+  }
+`;
+
+export const CREATE_REVIEW_MUTATION = gql`
+  mutation CREATE_REVIEW_MUTATION($data: CreateReviewInput!) {
+    createReview(data: $data) {
+      id
+      text
+      rating
+      product {
+        id
       }
     }
   }

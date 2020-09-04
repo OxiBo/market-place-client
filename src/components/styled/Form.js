@@ -10,6 +10,10 @@ const Form = styled.div`
   box-shadow: -1px -5px 52px -5px rgba(222, 209, 222, 1);
   h2 {
     font-size: 4rem;
+    a {
+      all: inherit;
+      cursor: pointer;
+    }
   }
   h3 {
     text-align: center;

@@ -10,9 +10,9 @@ import { NavBar } from "../components/NavBar";
 // import { CURRENT_USER_QUERY } from "../components/User";
 // import { MockedProvider } from "react-apollo/test-utils";
 import { MockedProvider } from "@apollo/react-testing";
- // mocking withCookies - https://github.com/reactivestack/cookies/blob/master/packages/react-cookie/src/__tests__/withCookies-test.js
+// mocking withCookies - https://github.com/reactivestack/cookies/blob/master/packages/react-cookie/src/__tests__/withCookies-test.js
 import { CookiesProvider, withCookies, Cookies } from "react-cookie";
-
+import { setMyCookies } from '../testUtils/cookiesMocks'
 import { CART_ITEMS_QUERY } from "../utils/serverOperations";
 import { CART_OPEN_QUERY } from "../utils/localOperations";
 
@@ -88,6 +88,7 @@ const signedInMocksWithCartItems = [
 //   console.error = originalError;
 // });
 
+
 describe("<NavBar />", () => {
   it("renders component without being logged in and match snapshot", async () => {
     const cookies = new Cookies();
@@ -116,16 +117,17 @@ describe("<NavBar />", () => {
   });
 
   it("renders component with buyer logged in and match snapshot", async () => {
-    const cookies = new Cookies();
-    cookies.set("token", "token_lskdjflskdjflskdjflskdf");
-    cookies.set("type", "BUYER");
-    cookies.set("name", "Test");
-    cookies.set("id", "lskdjflskdjflskdjflskdf");
+    const myCookies = setMyCookies(
+      "token_lskdjflskdjflskdjflskdf",
+      "BUYER",
+      "Test",
+      "lskdjflskdjflskdjflskdf"
+    );
 
     const Component = withCookies(NavBar);
 
     const wrapper = mount(
-      <CookiesProvider cookies={cookies}>
+      <CookiesProvider cookies={myCookies}>
         <MemoryRouter>
           <MockedProvider
             mocks={signedInMocksWithCartItems}
@@ -148,16 +150,17 @@ describe("<NavBar />", () => {
   });
 
   it("renders component with seller logged in and match snapshot", async () => {
-    const cookies = new Cookies();
-    cookies.set("token", "token_lskdjflskdjflskdjflskdf");
-    cookies.set("type", "SELLER");
-    cookies.set("name", "Seller");
-    cookies.set("id", "lskdjflskdjflskdjflskdf");
+    const myCookies = setMyCookies(
+      "token_lskdjflskdjflskdjflskdf",
+      "SELLER",
+      "Seller",
+      "lskdjflskdjflskdjflskdf"
+    );
 
     const Component = withCookies(NavBar);
 
     const wrapper = mount(
-      <CookiesProvider cookies={cookies}>
+      <CookiesProvider cookies={myCookies}>
         <MemoryRouter>
           <MockedProvider
             mocks={signedInMocksWithCartItems}
@@ -180,13 +183,14 @@ describe("<NavBar />", () => {
 
   it("renders the amount of items in buyer's cart", async () => {
     const Component = withCookies(NavBar);
-    const cookies = new Cookies();
-    cookies.set("token", "token_lskdjflskdjflskdjflskdf");
-    cookies.set("type", "BUYER");
-    cookies.set("name", "Test");
-    cookies.set("id", "lskdjflskdjflskdjflskdf");
+    const myCookies = setMyCookies(
+      "token_lskdjflskdjflskdjflskdf",
+      "BUYER",
+      "Test",
+      "lskdjflskdjflskdjflskdf"
+    );
     const wrapper = mount(
-      <CookiesProvider cookies={cookies}>
+      <CookiesProvider cookies={myCookies}>
         <MemoryRouter>
           <MockedProvider
             mocks={signedInMocksWithCartItems}
@@ -214,16 +218,17 @@ describe("<NavBar />", () => {
     // expect(toJSON(nav)).toMatchSnapshot();
   });
   it("signs user out when the logout button is clicked", async () => {
-    const cookies = new Cookies();
-    cookies.set("token", "token_lskdjflskdjflskdjflskdf");
-    cookies.set("type", "BUYER");
-    cookies.set("name", "Test");
-    cookies.set("id", "lskdjflskdjflskdjflskdf");
+    const myCookies = setMyCookies(
+      "token_lskdjflskdjflskdjflskdf",
+      "BUYER",
+      "Test",
+      "lskdjflskdjflskdjflskdf"
+    );
 
     const Component = withRouter(withCookies(NavBar));
     let apolloClient;
     const wrapper = mount(
-      <CookiesProvider cookies={cookies}>
+      <CookiesProvider cookies={myCookies}>
         <MemoryRouter>
           <MockedProvider
             mocks={signedInMocksWithCartItems}
@@ -246,7 +251,7 @@ describe("<NavBar />", () => {
     logoutButton.simulate("click");
     await act(async () => wait());
     const loginButton = wrapper.find('a[data-test="login"]');
-    console.log(loginButton.debug());
+    // console.log(loginButton.debug());
     expect(loginButton.text()).toContain("Login");
   });
 });

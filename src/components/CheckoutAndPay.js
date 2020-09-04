@@ -10,6 +10,7 @@ import Error from "./ErrorMessage";
 import {
   CHECKOUT_AND_PAY_MUTATION,
   CART_ITEMS_QUERY,
+  FETCH_USER_ORDERITEMS
 } from "../utils/serverOperations";
 
 class CheckoutAndPay extends Component {
@@ -17,7 +18,7 @@ class CheckoutAndPay extends Component {
 //     console.log(this.props);
 //   }
   onToken = async (token, checkoutAndPayMutation) => {
-    console.log(token);
+    // console.log(token);
     const res = await checkoutAndPayMutation({
       variables: { token: token.id },
     });
@@ -46,7 +47,7 @@ class CheckoutAndPay extends Component {
           return (
             <Mutation
               mutation={CHECKOUT_AND_PAY_MUTATION}
-              refetchQueries={[{ query: CART_ITEMS_QUERY }]}
+              refetchQueries={[{ query: FETCH_USER_ORDERITEMS }]} // FETCH_USER_ORDERITEMS ???
               onCompleted={(res) => console.log(res)}
             >
               {(checkoutAndPayMutation, { error }) => (

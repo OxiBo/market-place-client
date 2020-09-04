@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import PaginationStyles from "../styled/PaginationStyles";
 
-export default class PagWrapper extends Component {
+export default class InnerPagination extends Component {
   state = {
     page: 1,
   };
@@ -26,8 +26,11 @@ export default class PagWrapper extends Component {
           if (loading) return <p>Loading...</p>;
 
           /* if (error) return <Error error={error} />; */
+          console.log(data);
+          console.log(variableValue);
 
           const count = data[connectionType].aggregate.count;
+          console.log(count);
           const pages = Math.ceil(count / perPage);
           {
             /* 
@@ -35,44 +38,29 @@ export default class PagWrapper extends Component {
           }
           return (
             <>
-            <PaginationStyles>
-              <a
-                onClick={(e) => {
-                  {
-                    /* e.preventDefault();
-                  e.stopPropagation();
-                  e.nativeEvent.stopImmediatePropagation(); */
-                  }
-                  this.getPage(-1);
-                }}
-                aria-disabled={page <= 1}
-              >
-                ← Prev
-              </a>
-              <p>
-                Page {page} of {pages}
-              </p>
-              <p>{count} Reviews Total</p>
-              <a
-                onClick={(e) => {
-                  {
-                    /* e.preventDefault(); */
-                  }
-                  {
-                    /* e.stopPropagation(); */
-                  }
-                  {
-                    /* e.nativeEvent.stopImmediatePropagation(); */
-                  }
-                  this.getPage(1);
-                }}
-                aria-disabled={page >= pages}
-              >
-                Next →
-              </a>
-           
-            </PaginationStyles>
-            {this.props.children(this.state)}
+              <PaginationStyles>
+                <a
+                  onClick={(e) => {
+                    this.getPage(-1);
+                  }}
+                  aria-disabled={page <= 1}
+                >
+                  ← Prev
+                </a>
+                <p>
+                  Page {page} of {pages}
+                </p>
+                <p>{count} Total</p>
+                <a
+                  onClick={(e) => {
+                    this.getPage(1);
+                  }}
+                  aria-disabled={page >= pages}
+                >
+                  Next →
+                </a>
+              </PaginationStyles>
+              {this.props.children(this.state)}
             </>
           );
         }}

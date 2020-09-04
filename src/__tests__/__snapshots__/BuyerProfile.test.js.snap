@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BuyerProfile/> changes "show ordered items" button's text when clicked and matches snapshot 1`] = `
+<button
+  className="sc-AxhCb iCtNby"
+  data-test="ordered-items-button"
+  onClick={[Function]}
+>
+  Show
+   ordered items
+</button>
+`;
+
+exports[`<BuyerProfile/> hides "update profile" button, when the button has been clicked and matches snapshot 1`] = `ReactWrapper {}`;
+
+exports[`<BuyerProfile/> renders with buyer logged in and matches snapshot 1`] = `
+<div
+  data-test="buyer-profile"
+>
+   
+  <h2>
+    Ms. Sydney Stehr
+  </h2>
+  <p>
+    <span>
+      Email:
+    </span>
+     
+    Otto_Collier@Mueller.co.uk
+  </p>
+  <p>
+    <span>
+      age:
+    </span>
+     
+    21
+  </p>
+  <styled.button
+    data-test="update-profile-button"
+    onClick={[Function]}
+  >
+    <button
+      className="sc-AxhCb iCtNby"
+      data-test="update-profile-button"
+      onClick={[Function]}
+    >
+      Update Profile
+    </button>
+  </styled.button>
+  <styled.button
+    data-test="ordered-items-button"
+    onClick={[Function]}
+  >
+    <button
+      className="sc-AxhCb iCtNby"
+      data-test="ordered-items-button"
+      onClick={[Function]}
+    >
+      Show
+       ordered items
+    </button>
+  </styled.button>
+</div>
+`;

@@ -50,6 +50,7 @@ import SellersList from "./components/SellersList";
 import SingleItem from "./components/SingleItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
+import CreateReviewForm from "./components/CreateReviewForm";
 import Order from "./components/Order";
 import OrdersList from "./components/OrdersList";
 
@@ -197,6 +198,11 @@ ReactDOM.render(
               component={requireSellerAuth(CreateProduct)}
             />
             <Route exact path="/item/:id" component={SingleItem} />
+            <Route
+              exact
+              path="/item/:id/create-review"
+              component={CreateReviewForm}
+            />
             <Route exact path="/order/:id" component={Order} />
             <Route exact path="/orders" component={OrdersList} />
             {/* <Route exact path='/formik-test' component={Basic} /> */}

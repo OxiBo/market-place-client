@@ -79,7 +79,7 @@ class BuyerProfile extends Component {
                       <img src={currentImage || noImage} alt="currentName" />
                     </div>
 
-                    <div>
+                    <div data-test="buyer-profile">
                       {" "}
                       <h2>{currentName}</h2>
                       <p>
@@ -91,11 +91,11 @@ class BuyerProfile extends Component {
                         </p>
                       )}
                       {!this.state.update && (
-                        <Button onClick={() => this.setState({ update: true })}>
+                        <Button data-test="update-profile-button" onClick={() => this.setState({ update: true })}>
                           Update Profile
                         </Button>
                       )}
-                      <Button
+                      <Button data-test="ordered-items-button"
                         onClick={() =>
                           this.setState((prevState) => ({
                             openOrderItems: !prevState.openOrderItems,
@@ -391,3 +391,4 @@ class BuyerProfile extends Component {
 }
 
 export default withCookies(BuyerProfile);
+export { BuyerProfile } // ????
