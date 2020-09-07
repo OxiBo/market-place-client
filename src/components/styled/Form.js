@@ -12,13 +12,28 @@ const Form = styled.div`
     font-size: 4rem;
     a {
       all: inherit;
+      display: inline;
       cursor: pointer;
+      font-style: italic;
+    }
+    a:visited{
+      color: inherit;
     }
   }
   h3 {
     text-align: center;
     margin: 1rem;
     font-size: 3rem;
+    a {
+      all: inherit;
+      display: inline;
+      font-style: italic;
+      cursor: pointer;
+      padding: 0;
+    }
+    a:visited{
+      color: inherit;
+    }
   }
 
   .fieldset {

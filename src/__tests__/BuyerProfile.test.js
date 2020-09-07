@@ -106,4 +106,7 @@ describe("<BuyerProfile/>", () => {
     pureComponent.setState({ update: true });
     expect(updateProfileButton).toEqual({});
   });
+
+
+  
 });

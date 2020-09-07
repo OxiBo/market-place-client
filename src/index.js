@@ -51,6 +51,7 @@ import SingleItem from "./components/SingleItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
 import CreateReviewForm from "./components/CreateReviewForm";
+import ReviewForm from "./components/ReviewForm";
 import Order from "./components/Order";
 import OrdersList from "./components/OrdersList";
 
@@ -200,8 +201,13 @@ ReactDOM.render(
             <Route exact path="/item/:id" component={SingleItem} />
             <Route
               exact
-              path="/item/:id/create-review"
+              path="/item/:id/create-review/:update"
               component={CreateReviewForm}
+            />
+            <Route
+              exact
+              path="/item/:id/:name/review/:update"
+              component={ReviewForm}
             />
             <Route exact path="/order/:id" component={Order} />
             <Route exact path="/orders" component={OrdersList} />

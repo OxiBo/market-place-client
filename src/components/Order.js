@@ -6,7 +6,7 @@ import { FETCH_RECENT_ORDER } from "../utils/serverOperations";
 import Error from "./ErrorMessage";
 import InnerContainer from "./styled/InnerContainer";
 import { noImage } from "../utils/utilVars";
-
+import Button from "./styled/Button";
 const OrderStyles = styled.div`
   h2 {
     font-size: 2rem;
@@ -48,13 +48,13 @@ const OrderStyles = styled.div`
       }
       p {
         padding: 1rem;
-       
+
         span {
           padding-left: 1.5rem;
           font-weight: 600;
-          a{
-          font-size: 2rem;
-        }
+          a {
+            font-size: 2rem;
+          }
         }
       }
     }
@@ -122,12 +122,23 @@ const Order = (props) => {
                           </Link>
                         </span>
                       </p>
+                      {item.reviewed ? (
+                        <Button>Update review</Button>
+                      ) : (
+                        <Link
+                          to={{
+                            pathname: `/item/${item.product.id}/create-review`,
+                            search: `?product=${item.name}`,
+                          }}
+                        >
+                          <Button>Write review</Button>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
             </OrderStyles>
-           
           </InnerContainer>
         );
       }}

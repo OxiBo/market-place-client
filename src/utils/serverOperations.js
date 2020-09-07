@@ -282,6 +282,9 @@ export const FETCH_USER_PROFILE = gql`
         name
         price
         count
+        reviewed {
+          id
+        }
         order {
           id
           finished
@@ -307,7 +310,7 @@ export const FETCH_USER_ORDERITEMS = gql`
       price
       count
       image
-      reviewed
+      reviewed { id }
       product {
         id
         name
@@ -445,6 +448,9 @@ export const FETCH_RECENT_ORDER = gql`
       id
       finishedAt
       items {
+        reviewed {
+          id
+        }
         product {
           id
           seller {
@@ -483,6 +489,19 @@ export const FETCH_BUYER_ORDERS = gql`
 export const CREATE_REVIEW_MUTATION = gql`
   mutation CREATE_REVIEW_MUTATION($data: CreateReviewInput!) {
     createReview(data: $data) {
+      id
+      text
+      rating
+      product {
+        id
+      }
+    }
+  }
+`;
+
+export const UPDATE_REVIEW_MUTATION = gql`
+  mutation UPDATE_REVIEW_MUTATION($id: ID!, $data: UpdateReviewInput!) {
+    updateReview(id: $id, data: $data) {
       id
       text
       rating

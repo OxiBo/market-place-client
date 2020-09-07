@@ -11,7 +11,7 @@ import SmallContainer from "./styled/SmallContainer";
 import { orderItemsPerPage } from "../configVars";
 
 const OrderedItemsList = ({ userId }) => (
-  <SmallContainer>
+  <SmallContainer data-test="ordered-items-list">
     <InnerPagination
       query={ALL_USER_ORDERITEMS_PAGINATION}
       variableName={"userId"}
@@ -31,7 +31,7 @@ const OrderedItemsList = ({ userId }) => (
             {({ data, error, loading }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <Error error={error} />;
-
+              console.log(data);
               return data.myOrderItems.map(
                 (item) =>
                   console.log(item) || (

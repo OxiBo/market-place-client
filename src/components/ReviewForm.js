@@ -1,7 +1,7 @@
 // TODO wrap it in HOC to check permissions. Only buyers can see this page and create reviews
 
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Formik } from "formik";
 import styled from "styled-components";
@@ -12,7 +12,11 @@ import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import FormInput from "./styled/FormInput";
 import Form from "./styled/Form";
-import { CREATE_REVIEW_MUTATION, FETCH_USER_ORDERITEMS } from "../utils/serverOperations";
+import {
+  CREATE_REVIEW_MUTATION,
+  UPDATE_REVIEW_MUTATION,
+  FETCH_USER_ORDERITEMS,
+} from "../utils/serverOperations";
 
 // const ProductForm = styled(Form)``;
 
@@ -26,18 +30,26 @@ const TextArea = styled(FormInput).attrs({
   margin: 0.7rem 0.7rem 0.2rem 0.7rem;
 `;
 
-class CreateReviewForm extends Component {
+class ReviewForm extends Component {
   render() {
-      console.log(this.props)
-    const  productId  = this.props.match.params.id;
-    const productName  = this.props.location.search.split("=")[1].replace("%20", " ")
+    console.log(this.props);
+
+    const update = this.props.match.params.update === "true" ? true : false;
+    const productId = this.props.match.params.id;
+    const productName = this.props.match.params.name;
+    const reviewId = this.props.location.search.split("=")[1];
     return (
-      <Mutation mutation={CREATE_REVIEW_MUTATION} refetchQueries={[{query: FETCH_USER_ORDERITEMS}]}>
-        {(createReviewMutation, { error, loading }) => {
+      <Mutation
+        mutation={update ? UPDATE_REVIEW_MUTATION : CREATE_REVIEW_MUTATION}
+        refetchQueries={[{ query: FETCH_USER_ORDERITEMS }]}
+      >
+        {(reviewMutation, { error, loading }) => {
           return (
             <InnerContainer>
               <Helmet>
-                <title>Create Review For {productName}</title>
+                <title>
+                  {update ? "Update" : "Create"} Review For {productName}
+                </title>
               </Helmet>
               {error && <Error error={error} />}
               {loading && <div>Loading....</div>}
@@ -72,14 +84,19 @@ class CreateReviewForm extends Component {
                 }}
                 onSubmit={async (values, { setSubmitting }) => {
                   const variables = {
-                    ...values,
-                    published: true,
-                    product: productId,
+                    data: {
+                      ...values,
+                      published: true,
+                      product: productId,
+                    },
                   };
-
+                  if (update) {
+                    variables.id = reviewId;
+                    delete variables.data.product
+                  }
                   try {
-                    const res = await createReviewMutation({
-                      variables: { data: variables },
+                    const res = await reviewMutation({
+                      variables,
                     });
                     console.log(res);
                     this.props.history.goBack();
@@ -108,7 +125,8 @@ class CreateReviewForm extends Component {
                   return (
                     <Form>
                       <h3>
-                        Create Review For <Link to={`/item/${productId}`}>{productName}</Link>
+                        {update ? "Update" : "Create"} Review For{" "}
+                        <Link to={`/item/${productId}`}>{productName}</Link>
                       </h3>
                       <form action="" onSubmit={handleSubmit}>
                         <div className="fieldset">
@@ -178,4 +196,4 @@ class CreateReviewForm extends Component {
     );
   }
 }
-export default CreateReviewForm;
+export default ReviewForm;

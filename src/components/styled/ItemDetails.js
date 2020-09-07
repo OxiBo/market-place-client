@@ -3,25 +3,26 @@ import styled from "styled-components";
 const ItemDetails = styled.div`
   display: flex;
   border-bottom: 2px solid lightgrey;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   justify-content: center;
   align-items: center;
   img {
     width: 120px;
     height: 100%;
     object-fit: cover;
-    padding: 2rem;
+    padding: 0;
   }
   div {
     flex: 1;
-    padding: 1rem;
+    padding: 0.5rem;
+    div{
     a {
       text-decoration: none;
       color: inherit;
     }
     h3 {
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       text-align: center;
     }
     p {
@@ -34,7 +35,7 @@ const ItemDetails = styled.div`
           font-size: 2rem;
         }
       }
-    }
+    }}
   }
 `;
 

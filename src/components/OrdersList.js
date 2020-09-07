@@ -23,7 +23,7 @@ const OrderListStyles = styled(InnerContainer)`
   div {
     /* background-color: red; */
     border: 1px solid lightgrey;
-    flex: 1;
+    flex: 1 25rem;
     margin: 0.5rem;
     .order-details {
       display: grid;
