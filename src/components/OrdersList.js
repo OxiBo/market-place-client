@@ -60,7 +60,7 @@ const OrdersList = (props) => {
         if (error) return <Error error={error} />;
         if (loading) return <p>Loading...</p>;
         const { myOrders } = data;
-        console.log(myOrders);
+        {/* console.log(myOrders); */}
         return (
           <InnerContainer>
             <h2>You have {myOrders.length} orders</h2>

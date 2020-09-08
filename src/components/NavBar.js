@@ -130,11 +130,11 @@ class NavBar extends Component {
               <li>
                 {type === "BUYER" ? (
                   <Link to={`/buyer-profile/${userId}`}>
-                    Logged in as {userName}{" "}
+                    {userName}'s profile
                   </Link>
                 ) : (
                   <Link to={`/seller-profile/${userId}`}>
-                    Logged in as {userName}{" "}
+                     {userName}'s profile
                   </Link>
                 )}
               </li>

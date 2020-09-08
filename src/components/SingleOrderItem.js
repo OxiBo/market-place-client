@@ -18,56 +18,54 @@ const SingleOrderItem = ({
   item: { id, count, image, name, reviewed, price, product },
 }) => {
   return (
-    console.log(reviewed) || (
-      <ItemDetails key={id}>
-        <img src={image || noImage} alt={name} />
+    <ItemDetails key={id}>
+      <img src={image || noImage} alt={name} />
+      <div>
         <div>
-          <div>
-            <Link to={`/item/${product.id}`}>
-              {" "}
-              <h3>{name} </h3>
-            </Link>
-            <hr />
-            <p>
-              Qty: <span>{count}</span>
-            </p>
-            <p>
-              Each: <span>${price / 100}</span>
-            </p>
-            <p>
-              SubTotal: <span>$ {(count * price) / 100}</span>
-            </p>
-            <p>
-              Sold By:{" "}
-              <span>
-                <Link to={`/seller/${product.seller.id}`}>
-                  {product.seller.name}
-                </Link>
-              </span>
-            </p>
-          </div>
-
-          {reviewed ? (
-            <Link
-              to={{
-                pathname: `/item/${product.id}/${product.name}/review/${true}`,search: `?reviewId=${reviewed.id}` // how to get review ID
-              }}
-            >
-              <Button>Update review</Button>
-            </Link>
-          ) : (
-            <Link
-              to={{
-                pathname: `/item/${product.id}/${product.name}/review/${false}`,
-           
-              }}
-            >
-              <Button>Write review</Button>
-            </Link>
-          )}
+          <Link to={`/item/${product.id}`}>
+            {" "}
+            <h3>{name} </h3>
+          </Link>
+          <hr />
+          <p>
+            Qty: <span>{count}</span>
+          </p>
+          <p>
+            Each: <span>${price / 100}</span>
+          </p>
+          <p>
+            SubTotal: <span>$ {(count * price) / 100}</span>
+          </p>
+          <p>
+            Sold By:{" "}
+            <span>
+              <Link to={`/seller/${product.seller.id}`}>
+                {product.seller.name}
+              </Link>
+            </span>
+          </p>
         </div>
-      </ItemDetails>
-    )
+
+        {reviewed ? (
+          <Link
+            to={{
+              pathname: `/item/${product.id}/${product.name}/review/${true}`,
+              search: `?reviewId=${reviewed.id}`, // how to get review ID
+            }}
+          >
+            <Button>Update review</Button>
+          </Link>
+        ) : (
+          <Link
+            to={{
+              pathname: `/item/${product.id}/${product.name}/review/${false}`,
+            }}
+          >
+            <Button>Write review</Button>
+          </Link>
+        )}
+      </div>
+    </ItemDetails>
   );
 };
 

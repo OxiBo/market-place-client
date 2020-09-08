@@ -2,7 +2,7 @@
 
 exports[`<BuyerProfile/> changes "show ordered items" button's text when clicked and matches snapshot 1`] = `
 <button
-  className="sc-AxhCb iCtNby"
+  className="sc-AxhCb iJsTvI"
   data-test="ordered-items-button"
   onClick={[Function]}
 >
@@ -19,14 +19,14 @@ exports[`<BuyerProfile/> renders with buyer logged in and matches snapshot 1`] =
 >
    
   <h2>
-    Ms. Izabella Haag
+    Mrs. Richard Steuber
   </h2>
   <p>
     <span>
       Email:
     </span>
      
-    Nathen.Bailey@Aubree.biz
+    Fabiola_Nicolas@Farrell.us
   </p>
   <p>
     <span>
@@ -40,7 +40,7 @@ exports[`<BuyerProfile/> renders with buyer logged in and matches snapshot 1`] =
     onClick={[Function]}
   >
     <button
-      className="sc-AxhCb iCtNby"
+      className="sc-AxhCb iJsTvI"
       data-test="update-profile-button"
       onClick={[Function]}
     >
@@ -52,7 +52,7 @@ exports[`<BuyerProfile/> renders with buyer logged in and matches snapshot 1`] =
     onClick={[Function]}
   >
     <button
-      className="sc-AxhCb iCtNby"
+      className="sc-AxhCb iJsTvI"
       data-test="ordered-items-button"
       onClick={[Function]}
     >

@@ -75,9 +75,8 @@ exports[`<NavBar /> renders component with buyer logged in and match snapshot 1`
           href="/buyer-profile/lskdjflskdjflskdjflskdf"
           onClick={[Function]}
         >
-          Logged in as 
           Test
-           
+          's profile
         </a>
       </LinkAnchor>
     </Link>
@@ -714,9 +713,8 @@ exports[`<NavBar /> renders component with seller logged in and match snapshot 1
           href="/seller-profile/lskdjflskdjflskdjflskdf"
           onClick={[Function]}
         >
-          Logged in as 
           Seller
-           
+          's profile
         </a>
       </LinkAnchor>
     </Link>

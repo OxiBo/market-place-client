@@ -123,12 +123,22 @@ const Order = (props) => {
                         </span>
                       </p>
                       {item.reviewed ? (
-                        <Button>Update review</Button>
+                        <Link
+                          to={{
+                            pathname: `/item/${item.product.id}/${
+                              item.product.name
+                            }/review/${true}`,
+                            search: `?reviewId=${item.reviewed.id}`, // how to get review ID
+                          }}
+                        >
+                          <Button>Update review</Button>
+                        </Link>
                       ) : (
                         <Link
                           to={{
-                            pathname: `/item/${item.product.id}/create-review`,
-                            search: `?product=${item.name}`,
+                            pathname: `/item/${item.product.id}/${
+                              item.product.name
+                            }/review/${false}`,
                           }}
                         >
                           <Button>Write review</Button>

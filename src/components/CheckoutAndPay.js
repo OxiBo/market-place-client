@@ -47,7 +47,7 @@ class CheckoutAndPay extends Component {
           return (
             <Mutation
               mutation={CHECKOUT_AND_PAY_MUTATION}
-              refetchQueries={[{ query: FETCH_USER_ORDERITEMS }]} // FETCH_USER_ORDERITEMS ???
+              refetchQueries={[{ query: FETCH_USER_ORDERITEMS }, {query: CART_ITEMS_QUERY}]} // FETCH_USER_ORDERITEMS ???
               onCompleted={(res) => console.log(res)}
             >
               {(checkoutAndPayMutation, { error }) => (

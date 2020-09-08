@@ -20,7 +20,7 @@ const OrderedItemsList = ({ userId }) => (
       connectionType={"orderItemsConnection"}
     >
       {({ page }) =>
-        console.log(page) || (
+         (
           <Query
             query={FETCH_USER_ORDERITEMS}
             variables={{
@@ -34,7 +34,7 @@ const OrderedItemsList = ({ userId }) => (
               console.log(data);
               return data.myOrderItems.map(
                 (item) =>
-                  console.log(item) || (
+                 (
                     <SingleOrderItem item={item} key={item.id} />
                   )
               );

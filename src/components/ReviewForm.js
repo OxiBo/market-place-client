@@ -2,20 +2,23 @@
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withApollo } from "react-apollo";
 import { Helmet } from "react-helmet";
 import { Formik } from "formik";
 import styled from "styled-components";
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import Error from "./ErrorMessage";
 import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import FormInput from "./styled/FormInput";
 import Form from "./styled/Form";
+
 import {
   CREATE_REVIEW_MUTATION,
   UPDATE_REVIEW_MUTATION,
   FETCH_USER_ORDERITEMS,
+  FETCH_MY_REVIEW,
 } from "../utils/serverOperations";
 
 // const ProductForm = styled(Form)``;
@@ -31,10 +34,32 @@ const TextArea = styled(FormInput).attrs({
 `;
 
 class ReviewForm extends Component {
-  render() {
-    console.log(this.props);
-
+  state = {
+    text: "",
+    rating: "",
+    update: false,
+  };
+  async componentDidMount() {
     const update = this.props.match.params.update === "true" ? true : false;
+    this.setState({ update });
+    if (update) {
+      const {
+        data: {
+          myReview: { text, rating },
+        },
+      } = await this.props.client.query({
+        query: FETCH_MY_REVIEW,
+        variables: { id: this.props.location.search.split("=")[1] },
+      });
+
+      this.setState({ text, rating });
+    }
+  }
+
+  render() {
+    // console.log(this.props);
+    const { rating, text } = this.state;
+    const { update } = this.state;
     const productId = this.props.match.params.id;
     const productName = this.props.match.params.name;
     const reviewId = this.props.location.search.split("=")[1];
@@ -53,10 +78,12 @@ class ReviewForm extends Component {
               </Helmet>
               {error && <Error error={error} />}
               {loading && <div>Loading....</div>}
+
               <Formik
+                enableReinitialize // for showing initial values when form used for updating review
                 initialValues={{
-                  rating: "",
-                  text: "",
+                  rating,
+                  text,
                 }}
                 validate={(values) => {
                   const { rating, text } = values;
@@ -92,7 +119,7 @@ class ReviewForm extends Component {
                   };
                   if (update) {
                     variables.id = reviewId;
-                    delete variables.data.product
+                    delete variables.data.product; // update does not change product relationship
                   }
                   try {
                     const res = await reviewMutation({
@@ -196,4 +223,4 @@ class ReviewForm extends Component {
     );
   }
 }
-export default ReviewForm;
+export default withApollo(ReviewForm);

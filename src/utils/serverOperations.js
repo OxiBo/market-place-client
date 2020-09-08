@@ -453,6 +453,7 @@ export const FETCH_RECENT_ORDER = gql`
         }
         product {
           id
+          name
           seller {
             id
             name
@@ -486,6 +487,14 @@ export const FETCH_BUYER_ORDERS = gql`
   }
 `;
 
+export const FETCH_MY_REVIEW = gql`
+  query FETCH_REVIEW($id: ID!) {
+    myReview(id: $id) {
+      text
+      rating
+    }
+  }
+`;
 export const CREATE_REVIEW_MUTATION = gql`
   mutation CREATE_REVIEW_MUTATION($data: CreateReviewInput!) {
     createReview(data: $data) {
