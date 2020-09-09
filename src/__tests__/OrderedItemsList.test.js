@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
+import { Link } from "react-router-dom";
 import toJSON from "enzyme-to-json";
 import wait from "waait";
 import { act } from "react-dom/test-utils";
@@ -18,8 +19,9 @@ import {
   ALL_USER_ORDERITEMS_PAGINATION,
 } from "../utils/serverOperations";
 import InnerPagination from "../components/RenderProp/InnerPagination";
-
 import { fakeOrderItems } from "../testUtils/fakeTestData";
+
+const perPage = 2;
 
 const fetchOrderItemsMocks = [
   {
@@ -27,7 +29,7 @@ const fetchOrderItemsMocks = [
       query: FETCH_USER_ORDERITEMS,
       variables: {
         skip: 0,
-        first: 2,
+        first: perPage,
       },
     },
     result: {
@@ -75,17 +77,15 @@ it("displays a loading message", async () => {
 });
 
 describe("<OrderItemsList/>", () => {
-  // let myCookies, wrapper, buyerProfile, pureComponent;
-  // const Component = withCookies(BuyerProfile);
-  let wrapper, orderedItemsList, innerPagination, pureComponent;
+  let wrapper, myCookies, orderedItemsList;
 
   beforeEach(async () => {
-    //   myCookies = setMyCookies(
-    //     "token_lskdjflskdjflskdjflskdf",
-    //     "BUYER",
-    //     "Test",
-    //     "lskdjflskdjflskdjflskdf"
-    //   );
+    myCookies = setMyCookies(
+      "token_lskdjflskdjflskdjflskdf",
+      "BUYER",
+      "Test",
+      "lskdjflskdjflskdjflskdf"
+    );
 
     wrapper = mount(
       <MemoryRouter>
@@ -96,40 +96,19 @@ describe("<OrderItemsList/>", () => {
         </MockedProvider>
       </MemoryRouter>
     );
+
     await act(async () => wait());
     wrapper.update();
-    innerPagination = wrapper.find("InnerPagination");
     orderedItemsList = wrapper.find("OrderedItemsList");
-    pureComponent = innerPagination.instance();
-    // console.log(pureComponent)
   });
+
   it("renders and matches snapshot", async () => {
-    // console.log(buyerProfile.find("div[data-test='buyer-profile']").debug())
-    // await act(async () => wait());
-    // wrapper.update();
-    // console.log(orderedItemsList.debug());
     expect(
       toJSON(orderedItemsList.find("div[data-test='ordered-items-list']"))
     ).toMatchSnapshot();
-    // expect(orderedItemsList.text()).toContain("Loading...");
   });
-
-  //   it('changes "show ordered items" button\'s text when clicked and matches snapshot', async () => {
-  //     const orderItemsButton = wrapper.find(
-  //       'button[data-test="ordered-items-button"]'
-  //     );
-  //     expect(orderItemsButton.text()).toContain("Show ordered items");
-  //     pureComponent.setState({ openOrderItems: true });
-  //     expect(orderItemsButton.text()).toContain("Hide ordered items");
-  //     expect(toJSON(orderItemsButton)).toMatchSnapshot();
-  //   });
-
-  //   it('hides "update profile" button, when the button has been clicked and matches snapshot', async () => {
-  //     const updateProfileButton = buyerProfile.find(
-  //       'button[data-test="update-profile-button"]'
-  //     );
-  //     expect(updateProfileButton).toMatchSnapshot();
-  //     pureComponent.setState({ update: true });
-  //     expect(updateProfileButton).toEqual({});
-  //   });
+  it("renders a list of orderItems", async () => {
+    const singleItem = wrapper.find("SingleOrderItem");
+    expect(singleItem.length).toBe(perPage);
+  });
 });

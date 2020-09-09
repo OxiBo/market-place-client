@@ -31,7 +31,7 @@ const fakeOrderItems = () => [
         __typename: "Seller",
       },
     },
-    reviewed: false,
+    reviewed: null,
     order: {
       id: "asdfg",
       finishedAt: "2020-09-02T02:34:55.835Z",
@@ -56,7 +56,7 @@ const fakeOrderItems = () => [
         __typename: "Seller",
       },
     },
-    reviewed: false,
+    reviewed: null,
     order: {
       id: "asdfgsss",
       finishedAt: "2020-09-02T02:34:55.835Z",
