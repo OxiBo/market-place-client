@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SingleOrderItem/> renders and matches snapshot 1`] = `
+<SingleOrderItem
+  item={
+    Object {
+      "__typename": "OrderItem",
+      "count": 2,
+      "id": "123asd",
+      "image": "",
+      "name": "fake order item 0",
+      "order": Object {
+        "__typename": "Order",
+        "finishedAt": "2020-09-02T02:34:55.835Z",
+        "id": "asdfg",
+      },
+      "price": 10,
+      "product": Object {
+        "__typename": "Product",
+        "id": "456w",
+        "name": "fake order item 0",
+        "seller": Object {
+          "__typename": "Seller",
+          "id": "zxcv",
+          "name": "EbayTest",
+        },
+      },
+      "reviewed": null,
+    }
+  }
+  key="skdjflskdjf"
+>
+  <styled.div
+    data-test="single-order-item"
+    key="123asd"
+  >
+    <div
+      className="sc-AxjAm kiFaqk"
+      data-test="single-order-item"
+    >
+      <img
+        alt="fake order item 0"
+        src="https://res.cloudinary.com/di0hg10hd/image/upload/v1594237808/sickfits/n0t4uceatjy5jdoee9p0.png"
+      />
+      <div>
+        <div>
+          <Link
+            to="/item/456w"
+          >
+            <LinkAnchor
+              href="/item/456w"
+              navigate={[Function]}
+            >
+              <a
+                href="/item/456w"
+                onClick={[Function]}
+              >
+                 
+                <h3>
+                  fake order item 0
+                   
+                </h3>
+              </a>
+            </LinkAnchor>
+          </Link>
+          <hr />
+          <p>
+            Qty: 
+            <span>
+              2
+            </span>
+          </p>
+          <p>
+            Each: 
+            <span>
+              $
+              0.1
+            </span>
+          </p>
+          <p>
+            SubTotal: 
+            <span>
+              $ 
+              0.2
+            </span>
+          </p>
+          <p>
+            Sold By:
+             
+            <span>
+              <Link
+                to="/seller/zxcv"
+              >
+                <LinkAnchor
+                  href="/seller/zxcv"
+                  navigate={[Function]}
+                >
+                  <a
+                    href="/seller/zxcv"
+                    onClick={[Function]}
+                  >
+                    EbayTest
+                  </a>
+                </LinkAnchor>
+              </Link>
+            </span>
+          </p>
+        </div>
+        <Link
+          to={
+            Object {
+              "pathname": "/item/456w/fake order item 0/review/false",
+            }
+          }
+        >
+          <LinkAnchor
+            href="/item/456w/fake order item 0/review/false"
+            navigate={[Function]}
+          >
+            <a
+              href="/item/456w/fake order item 0/review/false"
+              onClick={[Function]}
+            >
+              <styled.button>
+                <button
+                  className="sc-AxirZ diJbcM"
+                >
+                  Write review
+                </button>
+              </styled.button>
+            </a>
+          </LinkAnchor>
+        </Link>
+      </div>
+    </div>
+  </styled.div>
+</SingleOrderItem>
+`;

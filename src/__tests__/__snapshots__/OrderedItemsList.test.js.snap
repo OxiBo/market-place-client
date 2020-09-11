@@ -660,10 +660,12 @@ exports[`<OrderItemsList/> renders and matches snapshot 1`] = `
           key="123asd"
         >
           <styled.div
+            data-test="single-order-item"
             key="123asd"
           >
             <div
               className="sc-AxirZ hfyZNr"
+              data-test="single-order-item"
             >
               <img
                 alt="fake order item 0"
@@ -792,10 +794,12 @@ exports[`<OrderItemsList/> renders and matches snapshot 1`] = `
           key="123vbn"
         >
           <styled.div
+            data-test="single-order-item"
             key="123vbn"
           >
             <div
               className="sc-AxirZ hfyZNr"
+              data-test="single-order-item"
             >
               <img
                 alt="fake order item 1"

@@ -13,6 +13,31 @@ const fakeBuyer = () => ({
   type: "BUYER",
 });
 
+const fakeOrderItem = () => ({
+  __typename: "OrderItem",
+  id: "123asd",
+  image: "",
+  count: 2,
+  name: "fake order item 0",
+  price: 10,
+  product: {
+    __typename: "Product",
+    id: "456w",
+    name: "fake order item 0",
+    seller: {
+      id: "zxcv",
+      name: "EbayTest",
+      __typename: "Seller",
+    },
+  },
+  reviewed: null,
+  order: {
+    id: "asdfg",
+    finishedAt: "2020-09-02T02:34:55.835Z",
+    __typename: "Order",
+  },
+});
+
 const fakeOrderItems = () => [
   {
     __typename: "OrderItem",
@@ -65,4 +90,4 @@ const fakeOrderItems = () => [
   },
 ];
 
-export { fakeBuyer, fakeOrderItems };
+export { fakeBuyer, fakeOrderItems, fakeOrderItem };
