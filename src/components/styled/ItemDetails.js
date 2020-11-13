@@ -14,28 +14,33 @@ const ItemDetails = styled.div`
   }
   div {
     flex: 1;
-    padding: 0.5rem;
-    div{
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    h3 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-    p {
-      padding: 0.5rem;
+    padding: 0 0.5rem;
+    div {
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      h3 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+      p {
+        padding: 0.5rem;
 
-      span {
-        padding-left: 1.5rem;
-        font-weight: 600;
-        a {
-          font-size: 2rem;
+        span {
+          padding-left: 1.5rem;
+          font-weight: 600;
+          a {
+            font-size: 2rem;
+          }
         }
       }
-    }}
+      p.info {
+        color: red;
+        font-style: italic;
+      }
+    }
   }
 `;
 

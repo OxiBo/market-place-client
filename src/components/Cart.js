@@ -32,13 +32,16 @@ const Cart = () => (
       if (loading) return <p>Loading...</p>;
 
       const cart = data.myCurrentOrder;
-      {/* console.log(data.myCurrentOrder); */}
+    console.log(data.myCurrentOrder);
+      
       if (!cart) return null; // cart does not open if there are no items in it
       const totalItems = data.myCurrentOrder.items.reduce(
         (count, item) => count + item.count,
         0
       );
-{/* console.log(calcCartTotalPrice(data.myCurrentOrder.items)) */}
+      {
+        /* console.log(calcCartTotalPrice(data.myCurrentOrder.items)) */
+      }
       return (
         <CartStyles open={localState.data.cartOpen}>
           <header>
@@ -59,16 +62,19 @@ const Cart = () => (
             <p>
               $ {calcCartTotalPrice(data.myCurrentOrder.items).toFixed(2) || 0}
             </p>
-
-            <CheckoutAndPay
-              amount={calcCartTotalPrice(data.myCurrentOrder.items)}
-              totalItems={totalItems}
-              image={data.myCurrentOrder.items.length && data.myCurrentOrder.items[0].image}
-            >
-              <Button>Checkout</Button>
-            </CheckoutAndPay>
+         
+              <CheckoutAndPay
+                amount={calcCartTotalPrice(data.myCurrentOrder.items)}
+                totalItems={totalItems}
+                image={
+                  data.myCurrentOrder.items.length &&
+                  data.myCurrentOrder.items[0].image
+                }
+              >
+                <Button>Checkout</Button>
+              </CheckoutAndPay>
+            
           </footer>
-        
         </CartStyles>
       );
     }}

@@ -13,6 +13,12 @@ const fakeBuyer = () => ({
   type: "BUYER",
 });
 
+
+const fakeDeletedBuyer = () => ({
+  __typename: "User",
+  id: "4234"
+});
+
 const fakeOrderItem = () => ({
   __typename: "OrderItem",
   id: "123asd",
@@ -90,4 +96,4 @@ const fakeOrderItems = () => [
   },
 ];
 
-export { fakeBuyer, fakeOrderItems, fakeOrderItem };
+export { fakeBuyer, fakeOrderItems, fakeOrderItem, fakeDeletedBuyer };

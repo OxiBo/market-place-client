@@ -16,7 +16,7 @@ import { CREATE_PRODUCT } from "../utils/serverOperations";
 // const ProductForm = styled(Form)``;
 
 //https://stackoverflow.com/questions/55776961/styled-components-extend-styles-and-change-element-type
-const TextArea = styled(FormInput).attrs({
+export const TextArea = styled(FormInput).attrs({
   as: "textarea",
 })`
   height: 100px;

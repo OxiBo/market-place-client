@@ -48,6 +48,7 @@ import ResetPassword from "./components/ResetPassword";
 import SellerPublic from "./components/SellerPublic";
 import SellersList from "./components/SellersList";
 import SingleItem from "./components/SingleItem";
+import UpdateItem from "./components/UpdateItem";
 import Login from "./components/Login";
 import CreateProduct from "./components/CreateProduct";
 import CreateReviewForm from "./components/CreateReviewForm";
@@ -199,6 +200,7 @@ ReactDOM.render(
               component={requireSellerAuth(CreateProduct)}
             />
             <Route exact path="/item/:id" component={SingleItem} />
+            <Route exact path="/item/:id/update" component={UpdateItem}/>
             <Route
               exact
               path="/item/:id/create-review/:update"

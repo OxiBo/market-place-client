@@ -2,7 +2,7 @@
 
 exports[`<OrderItemsList/> renders and matches snapshot 1`] = `
 <div
-  className="sc-AxhUy jeSEqW"
+  className="sc-AxheI fDWYuG"
   data-test="ordered-items-list"
 >
   <InnerPagination
@@ -664,7 +664,7 @@ exports[`<OrderItemsList/> renders and matches snapshot 1`] = `
             key="123asd"
           >
             <div
-              className="sc-AxirZ hfyZNr"
+              className="sc-AxirZ futyRa"
               data-test="single-order-item"
             >
               <img
@@ -684,7 +684,6 @@ exports[`<OrderItemsList/> renders and matches snapshot 1`] = `
                         href="/item/456w"
                         onClick={[Function]}
                       >
-                         
                         <h3>
                           fake order item 0
                            
@@ -798,7 +797,7 @@ exports[`<OrderItemsList/> renders and matches snapshot 1`] = `
             key="123vbn"
           >
             <div
-              className="sc-AxirZ hfyZNr"
+              className="sc-AxirZ futyRa"
               data-test="single-order-item"
             >
               <img
@@ -818,7 +817,6 @@ exports[`<OrderItemsList/> renders and matches snapshot 1`] = `
                         href="/item/456"
                         onClick={[Function]}
                       >
-                         
                         <h3>
                           fake order item 1
                            

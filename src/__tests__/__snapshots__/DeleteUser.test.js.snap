@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DeleteUser /> renders the delete button and matches the snapshot 1`] = `
+<DeleteUser
+  cookies={
+    Cookies {
+      "HAS_DOCUMENT_COOKIE": true,
+      "changeListeners": Array [],
+      "cookies": Object {},
+    }
+  }
+  history={
+    Object {
+      "listen": [MockFunction],
+      "location": Object {},
+      "push": [MockFunction],
+    }
+  }
+  type="BUYER"
+>
+  <Mutation
+    mutation={
+      Object {
+        "definitions": Array [
+          Object {
+            "directives": Array [],
+            "kind": "OperationDefinition",
+            "name": Object {
+              "kind": "Name",
+              "value": "deleteUser",
+            },
+            "operation": "mutation",
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "deleteUser",
+                  },
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                        "selectionSet": undefined,
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+            "variableDefinitions": Array [],
+          },
+        ],
+        "kind": "Document",
+        "loc": Object {
+          "end": 61,
+          "start": 0,
+        },
+      }
+    }
+    onCompleted={[Function]}
+  >
+    <styled.button
+      onClick={[Function]}
+    >
+      <button
+        className="sc-AxjAm coAxVD"
+        onClick={[Function]}
+      >
+         
+        Delete Profile
+      </button>
+    </styled.button>
+  </Mutation>
+</DeleteUser>
+`;

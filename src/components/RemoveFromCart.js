@@ -12,7 +12,7 @@ const SmallDeleteButton = styled.button`
   background: none;
   border: 0;
   margin-left: auto;
-width: 3rem;
+  width: 3rem;
   &:hover {
     color: red;
     cursor: pointer;
@@ -46,6 +46,7 @@ class RemoveFromCart extends Component {
   render() {
     const { id } = this.props;
     return (
+      // TODO - to make sure the cart wont open if no cart items left need to query myCurrentOrder each time after deleting a cart item. Delete Optimistic response?
       <Mutation
         mutation={REMOVE_ITEM_FROM_CART}
         variables={{ id }}
@@ -57,6 +58,7 @@ class RemoveFromCart extends Component {
             id,
           },
         }}
+        refetchQueries={[{ query: CART_ITEMS_QUERY }]}
       >
         {(removeItemFromOrder, { loading, error }) => (
           <SmallDeleteButton

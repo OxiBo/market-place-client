@@ -28,6 +28,7 @@ class CheckoutAndPay extends Component {
   render() {
     //   console.log(this.props)
     const { image, totalItems, amount } = this.props;
+    
     // TODO - refactor for better way to pass user's email
     return (
       <Query
@@ -40,7 +41,7 @@ class CheckoutAndPay extends Component {
         `}
       >
         {({ data, error, loading }) => {
-          console.log(data);
+          {/* console.log(data); */}
           if (loading) return <p>Loading...</p>;
           if (error) return <Error error={error} />;
           const email = data.meUser.email;
@@ -56,7 +57,7 @@ class CheckoutAndPay extends Component {
                   description={`Order of ${totalItems} items`} // the pop-in header subtitle
                   amount={amount * 100} // cents
                   currency="USD"
-                  image={image}
+                  image={image || ""}
                   stripeKey="pk_test_upCU3MtNHwG5x9o6WO1zkpGK00cJOUCZZE"
                   email={email}
                   token={(response) =>

@@ -97,6 +97,7 @@ class Item extends Component {
       price,
       seller,
     } = this.props.product;
+    // console.log(image)
     const { cookies } = this.props;
     const sellerId = cookies.get("id");
     const type = cookies.get("type");
@@ -134,7 +135,7 @@ class Item extends Component {
             <ItemButton>View </ItemButton>
           </Link>
 
-          {type === "BUYER" && <AddToOrder id={id} />}
+          {type === "BUYER" && stock > 0 && <AddToOrder id={id} />}
           {sellerId === seller.id && (
             <DeleteButton id={id}>Delete</DeleteButton>
           )}

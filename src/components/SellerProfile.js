@@ -5,6 +5,7 @@ import { Formik } from "formik";
 import styled from "styled-components";
 import { withCookies } from "react-cookie";
 import Error from "./ErrorMessage";
+import DeleteUser from "./DeleteUser";
 import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
@@ -91,6 +92,10 @@ class SellerProfile extends Component {
                           Update
                         </Button>
                       )}
+                      <DeleteUser
+                        type={"SELLER"}
+                        cookies={this.props.cookies}
+                      />
                     </div>
                   </Content>
                   {this.state.update && (

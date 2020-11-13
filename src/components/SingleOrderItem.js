@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { noImage } from "../utils/utilVars";
 import ItemDetails from "./styled/ItemDetails";
 import Button from "./styled/Button";
+import SingleReview from "./SingleReview";
 import { FETCH_MY_REVIEW } from "../utils/serverOperations";
 // const ReviewButton = styled(Button).attrs({
 //   as: Link,
@@ -14,6 +15,10 @@ import { FETCH_MY_REVIEW } from "../utils/serverOperations";
 //   /* max-width: 70%; */
 //   /* background: green; */
 // `;
+
+const ReviewStyles = styled.div`
+  border: 1px solid ${(props) => props.theme.lightGrey};
+`;
 
 const SingleOrderItem = ({
   item: { id, count, image, name, reviewed, price, product },
@@ -36,10 +41,14 @@ const SingleOrderItem = ({
       <img src={image || noImage} alt={name} />
       <div>
         <div>
-          <Link to={`/item/${product.id}`}>
-            {" "}
+          {product ? (
+            <Link to={`/item/${product.id}`}>
+              <h3>{name} </h3>
+            </Link>
+          ) : (
             <h3>{name} </h3>
-          </Link>
+          )}
+
           <hr />
           <p>
             Qty: <span>{count}</span>
@@ -50,15 +59,20 @@ const SingleOrderItem = ({
           <p>
             SubTotal: <span>$ {(count * price) / 100}</span>
           </p>
-          <p>
-            Sold By:{" "}
-            <span>
-              <Link to={`/seller/${product.seller.id}`}>
-                {product.seller.name}
-              </Link>
-            </span>
-          </p>
+          {product ? (
+            <p>
+              Sold By:{" "}
+              <span>
+                <Link to={`/seller/${product.seller.id}`}>
+                  {product.seller.name}
+                </Link>
+              </span>
+            </p>
+          ) : (
+            <p className="info">This product is not available any more</p>
+          )}
         </div>
+        {/* TODO - change this logic the way user could see their review even if the product was deleted */}
 
         {reviewed ? (
           <ApolloConsumer>
@@ -71,13 +85,21 @@ const SingleOrderItem = ({
             }}
           </ApolloConsumer>
         ) : (
-          <Link
-            to={{
-              pathname: `/item/${product.id}/${product.name}/review/${false}`,
-            }}
-          >
-            <Button>Write review</Button>
-          </Link>
+          product && (
+            <Link
+              to={{
+                pathname: `/item/${product.id}/${product.name}/review/${false}`,
+              }}
+            >
+              <Button>Write review</Button>
+            </Link>
+          )
+        )}
+
+        {reviewOpen && review && (
+          <ReviewStyles>
+            <SingleReview review={review}/>{" "}
+          </ReviewStyles>
         )}
       </div>
     </ItemDetails>

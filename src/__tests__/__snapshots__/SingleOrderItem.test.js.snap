@@ -35,7 +35,7 @@ exports[`<SingleOrderItem/> renders and matches snapshot 1`] = `
     key="123asd"
   >
     <div
-      className="sc-AxjAm kiFaqk"
+      className="sc-AxjAm gWNaeR"
       data-test="single-order-item"
     >
       <img
@@ -55,7 +55,6 @@ exports[`<SingleOrderItem/> renders and matches snapshot 1`] = `
                 href="/item/456w"
                 onClick={[Function]}
               >
-                 
                 <h3>
                   fake order item 0
                    

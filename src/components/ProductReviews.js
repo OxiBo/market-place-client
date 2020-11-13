@@ -64,6 +64,7 @@ const ProductReviews = (props) => (
             if (error) return <Error error={error} />;
 
             const { reviews } = data;
+            console.log(reviews)
             return (
               <>
                 {reviews.map((review) => {

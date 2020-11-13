@@ -5,17 +5,17 @@ import { Formik } from "formik";
 import styled from "styled-components";
 import { withCookies } from "react-cookie";
 import Error from "./ErrorMessage";
-import OrderedItemsList from "./OrderedItemsList"
+import OrderedItemsList from "./OrderedItemsList";
+import DeleteUser from "./DeleteUser";
 import InnerContainer from "./styled/InnerContainer";
 import Button from "./styled/Button";
 import Buttons from "./styled/Buttons";
 import Form from "./styled/Form";
 
-
-
 import FormInput from "./styled/FormInput";
 import uploadFile from "../utils/uploadFile";
 import { FETCH_USER_PROFILE, UPDATE_USER } from "../utils/serverOperations";
+
 import { noImage } from "../utils/utilVars";
 
 const Content = styled(InnerContainer)`
@@ -54,7 +54,6 @@ class BuyerProfile extends Component {
 
     return (
       <div>
-        
         <Query query={FETCH_USER_PROFILE}>
           {({ data, loading, error }) => {
             if (loading) return <p>Loading....</p>;
@@ -67,7 +66,9 @@ class BuyerProfile extends Component {
               age: currentAge,
               image: currentImage,
             } = data.meUser;
-            console.log(data.meUser);
+            {
+              /* console.log(data.meUser); */
+            }
             return (
               <>
                 <InnerContainer>
@@ -91,11 +92,17 @@ class BuyerProfile extends Component {
                         </p>
                       )}
                       {!this.state.update && (
-                        <Button data-test="update-profile-button" onClick={() => this.setState({ update: true })}>
+                        <Button
+                          data-test="update-profile-button"
+                          onClick={() => this.setState({ update: true })}
+                        >
                           Update Profile
                         </Button>
                       )}
-                      <Button data-test="ordered-items-button"
+                      <DeleteUser type={"BUYER"} cookies={this.props.cookies}/>
+                   
+                      <Button
+                        data-test="ordered-items-button"
                         onClick={() =>
                           this.setState((prevState) => ({
                             openOrderItems: !prevState.openOrderItems,
@@ -379,7 +386,9 @@ class BuyerProfile extends Component {
                       }}
                     </Mutation>
                   )}
-                  {this.state.openOrderItems && <OrderedItemsList userId={data.meUser.id}/>}
+                  {this.state.openOrderItems && (
+                    <OrderedItemsList userId={data.meUser.id} />
+                  )}
                 </InnerContainer>
               </>
             );
@@ -391,4 +400,4 @@ class BuyerProfile extends Component {
 }
 
 export default withCookies(BuyerProfile);
-export { BuyerProfile } // ????
+export { BuyerProfile }; // ????

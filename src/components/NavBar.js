@@ -8,6 +8,7 @@ import { withCookies, Cookies } from "react-cookie";
 import CartCount from "./CartCount";
 import { TOGGLE_CART_MUTATION } from "../utils/localOperations";
 import { CART_ITEMS_QUERY } from "../utils/serverOperations";
+import removeAuthCookies from "../utils/removeAuthCookies";
 
 const Navbar = styled.nav`
   background-color: ${(props) => props.theme.purpleLight};
@@ -134,7 +135,7 @@ class NavBar extends Component {
                   </Link>
                 ) : (
                   <Link to={`/seller-profile/${userId}`}>
-                     {userName}'s profile
+                    {userName}'s profile
                   </Link>
                 )}
               </li>
@@ -164,10 +165,7 @@ class NavBar extends Component {
                   href=""
                   className=""
                   onClick={() => {
-                    cookies.remove("token", { path: "/" });
-                    cookies.remove("name", { path: "/" });
-                    cookies.remove("id", { path: "/" });
-                    cookies.remove("type", { path: "/" });
+                    removeAuthCookies(cookies);
 
                     this.props.history.push(`/`);
                   }}

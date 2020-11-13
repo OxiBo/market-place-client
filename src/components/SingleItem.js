@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import { withCookies } from "react-cookie";
 import styled from "styled-components";
@@ -11,11 +12,11 @@ import ProductReviews from "./ProductReviews";
 import InnerContainer from "./styled/InnerContainer";
 import Buttons from "./styled/Buttons";
 import Button from "./styled/Button";
-import  ItemButton  from "./styled/ItemButton";
-import AddToOrder from './AddToOrder'
-import SearchProduct from './SearchProduct'
-import formatMoney from '../utils/formatMoney'
-
+import ItemButton from "./styled/ItemButton";
+import LinkButton from "./styled/LinkButton";
+import AddToOrder from "./AddToOrder";
+import SearchProduct from "./SearchProduct";
+import formatMoney from "../utils/formatMoney";
 
 const SingleItemStyles = styled.div`
   background-color: ${(props) => props.theme.innerContainerBackground};
@@ -46,7 +47,9 @@ const VisualDivs = styled.div`
     min-width: 6rem;
     text-align: center;
     padding: 1rem;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     line-height: 2;
     font-style: italic;
   }
@@ -57,14 +60,18 @@ const VisualDivs = styled.div`
     text-align: center;
     line-height: 2;
     /* margin: 1rem auto; */
-    a{
+    a {
       text-decoration: none;
+      
     }
   }
   a {
     cursor: pointer;
     text-align: center;
     padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* line-height: 2; */
     color: ${(props) => props.theme.purple};
   }
@@ -132,8 +139,6 @@ class SingleItem extends Component {
     reviews: false,
   };
 
-
-
   showReviews = () => {
     this.setState((prevState) => ({
       reviews: !prevState.reviews,
@@ -158,8 +163,8 @@ class SingleItem extends Component {
             /* console.log(data); */
           }
           if (!data.product) return <p>No item found for id:{this.props.id}</p>;
-         console.log(data.product); 
-          
+          console.log("product ID" + data.product.id);
+
           const {
             id,
             description,
@@ -189,7 +194,6 @@ class SingleItem extends Component {
                         <p>Rating: </p>
                         <h3>{rating}</h3>
                         <a onClick={this.showReviews}>
-                          
                           {this.state.reviews ? "Hide Reviews" : "See Reviews"}
                         </a>
                       </>
@@ -199,7 +203,11 @@ class SingleItem extends Component {
                   </VisualDivs>
                   <VisualDivs>
                     <p>Sold By: </p>
-                    <h2><a href={`/seller/${seller.id}`}><span>{seller.name}</span></a></h2>
+                    <h2>
+                      <a href={`/seller/${seller.id}`}>
+                        <span>{seller.name}</span>
+                      </a>
+                    </h2>
                   </VisualDivs>
                 </Visual>
                 <ProductInfo>
@@ -207,20 +215,30 @@ class SingleItem extends Component {
                   <hr />
                   <p className="description">{description}</p>
                   <Price>${formatMoney(price)}</Price>
-                  <p className="stock">
-                    {stock > 0 ? "in stock" : "not in stock"}
-                  </p>
+
+                  {userId === seller.id ? (
+                    <p className="stock">stock: {stock} items</p>
+                  ) : (
+                    <p className="stock">
+                      {stock > 0 ? "in stock" : "not in stock"}
+                    </p>
+                  )}
 
                   <Buttons>
+                    {userId === seller.id && (
+                      <ItemButton id={id} history={this.props.history}>
+                        <Link to={`/item/${id}/update`}>Update</Link>{" "}
+                      </ItemButton>
+                    )}{" "}
+                    {userId === seller.id && (
+                      <DeleteButton id={id} history={this.props.history}>
+                        Remove
+                      </DeleteButton>
+                    )}
                     <ItemButton onClick={() => this.props.history.goBack()}>
                       ← Go Back
                     </ItemButton>
-                    {userId === seller.id && (
-                      <DeleteButton id={id} history={this.props.history}>
-                        Delete This Product
-                      </DeleteButton>
-                    )}
-                    {type === "BUYER" && <AddToOrder id={id}/>}
+                    {type === "BUYER" && stock > 0 && <AddToOrder id={id} />}
                   </Buttons>
                 </ProductInfo>
               </SingleItemStyles>
@@ -236,4 +254,4 @@ class SingleItem extends Component {
 }
 
 export default withCookies(SingleItem);
-export { VisualDivs}
+export { VisualDivs };

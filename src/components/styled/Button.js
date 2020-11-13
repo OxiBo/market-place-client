@@ -8,8 +8,10 @@ const Button = styled.button`
   min-height: 30px;
   max-width: 70%;
   border-radius: 5px;
+  border: none;
   text-transform: uppercase;
   /* padding: 0.8rem 1.5rem; */
+  cursor: pointer;
   padding: 0.4rem 0.8rem;
   color: white;
   font-weight: bold;

@@ -87,6 +87,21 @@ export const CREATE_PRODUCT = gql`
     }
   }
 `;
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct($id: ID!, $data: UpdateProductInput!) {
+    updateProduct(id: $id, data: $data) {
+      id
+      name
+      department
+      description
+      image
+      largeImage
+      price
+      rating
+      stock
+    }
+  }
+`;
 
 export const DELETE_PRODUCT = gql`
   mutation deleteProduct($id: ID!) {
@@ -161,6 +176,13 @@ export const FETCH_PRODUCT_REVIEWS = gql`
       id
       rating
       text
+      user {
+        id
+      }
+      product {
+        id
+        name
+      }
     }
   }
 `;
@@ -372,14 +394,29 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const DELETE_USER = gql`
+  mutation deleteUser {
+    deleteUser {
+      id
+    }
+  }
+`;
+
 export const UPDATE_SELLER = gql`
   mutation updateSeller($data: UpdateSellerInput!) {
     updateSeller(data: $data) {
       id
       name
       email
-
       type
+    }
+  }
+`;
+
+export const DELETE_SELLER = gql`
+  mutation deleteSeller {
+    deleteSeller {
+      id
     }
   }
 `;
@@ -490,8 +527,15 @@ export const FETCH_BUYER_ORDERS = gql`
 export const FETCH_MY_REVIEW = gql`
   query FETCH_REVIEW($id: ID!) {
     myReview(id: $id) {
+      id
       text
       rating
+      product {
+        id
+      }
+      user {
+        id
+      }
     }
   }
 `;
