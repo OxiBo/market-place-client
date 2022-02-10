@@ -22,7 +22,7 @@
     "glamor": "^2.20.40",
     "graphql": "^15.0.0",
     "lodash.debounce": "^4.0.8",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-adopt": "^0.6.0",
     "react-apollo": "^3.1.5",
