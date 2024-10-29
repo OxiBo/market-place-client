@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Market App Client
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+The Market App Client is the frontend component of the Market App project, designed to provide a user-friendly interface for an e-commerce platform. It allows users to browse products, add items to their shopping cart, write product reviews, and track their orders. The client is built using React, Apollo Client, Styled Components, React Router, and Formik.
 
-### `yarn start`
+## Technologies
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**: React, Styled Components, React Router, Formik, Apollo Client
+- **State Management**: Apollo Client, React Context
+- **Styling**: Styled Components, Glamor
+- **Testing**: Jest, Enzyme, React Testing Library
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Features
 
-### `yarn test`
+- User authentication and authorization
+- Product listing and search
+- Image upload for products
+- Shopping cart functionality
+- Product reviews and ratings
+- Order tracking
+- Stripe integration for payments
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Prerequisites
 
-### `yarn build`
+- Node.js (v12 or later)
+- npm (v6 or later)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/OxiBo/market-place-client.git
+   cd market-place-client
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install dependencies:**
 
-### `yarn eject`
+    ```sh
+    npm install 
+    ```
+3. **Set up environment variables:**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Create a `.env` file in the root directory and add the necessary environment variables.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Start the client:**
+   ```sh
+     npm start 
+    ```
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. **Register/Login**: Users can register and log in to the application.
+2. **Browse Products**: Users can browse and search for products.
+3. **Add to Cart**: Users can add products to their shopping cart.
+4. **Checkout**: Users can proceed to checkout using Stripe for payment.
+5. **Review Products**: Users can write reviews for products they have purchased.
+6. **Track Orders**: Users can track their orders and view order history.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Server Repository
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+For the server-side code, please check out the repository: [Market App Server](https://github.com/OxiBo/market-app-graphql-prisma)
