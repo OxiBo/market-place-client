@@ -59,3 +59,8 @@ Create a `.env` file in the root directory and add the necessary environment var
 ## Server Repository
 
 For the server-side code, please check out the repository: [Market App Server](https://github.com/OxiBo/market-app-graphql-prisma)
+
+
+## Maintenance
+
+**Note**: This project is currently not maintained.
